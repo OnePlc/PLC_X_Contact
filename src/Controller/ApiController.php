@@ -35,12 +35,13 @@ class ApiController extends CoreController {
      *
      * @param AdapterInterface $oDbAdapter
      * @param ContactTable $oTableGateway
+     * @param $oServiceManager
      * @since 1.0.0
      */
-    public function __construct(AdapterInterface $oDbAdapter,ContactTable $oTableGateway) {
-        parent::__construct($oDbAdapter);
+    public function __construct(AdapterInterface $oDbAdapter,ContactTable $oTableGateway,$oServiceManager) {
         $this->oTableGateway = $oTableGateway;
         $this->sSingleForm = 'contact-single';
+        parent::__construct($oDbAdapter,$oTableGateway,$oServiceManager);
     }
 
     /**
@@ -67,6 +68,8 @@ class ApiController extends CoreController {
     public function listAction() {
         $this->layout('layout/json');
 
+        $bSelect2 = true;
+
         /**
          * todo: enforce to use /api/contact instead of /contact/api so we can do security checks in main api controller
         if(!\Application\Controller\ApiController::$bSecurityCheckPassed) {
@@ -83,12 +86,25 @@ class ApiController extends CoreController {
         $oItemsDB = $this->oTableGateway->fetchAll(false);
         if(count($oItemsDB) > 0) {
             foreach($oItemsDB as $oItem) {
-                $aItems[] = $oItem;
+                if($bSelect2) {
+                    $aItems[] = ['id'=>$oItem->getID(),'text'=>$oItem->getLabel()];
+                } else {
+                    $aItems[] = $oItem;
+                }
+
             }
         }
 
+        /**
+         * Build Select2 JSON Response
+         */
+        $aReturn = [
+            'state'=>'success',
+            'results' => $aItems,
+            'pagination' => (object)['more'=>false],
+        ];
+
         # Print List with all Entities
-        $aReturn = ['state'=>'success','message'=>'List all Contacts','aItems'=>$aItems];
         echo json_encode($aReturn);
 
         return false;

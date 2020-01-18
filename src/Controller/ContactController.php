@@ -38,10 +38,10 @@ class ContactController extends CoreController {
      * @param ContactTable $oTableGateway
      * @since 1.0.0
      */
-    public function __construct(AdapterInterface $oDbAdapter,ContactTable $oTableGateway) {
-        parent::__construct($oDbAdapter);
-        $this->oTableGateway = $oTableGateway;
+    public function __construct(AdapterInterface $oDbAdapter,ContactTable $oTableGateway,$oServiceManager) {
         $this->sSingleForm = 'contact-single';
+        $this->oTableGateway = $oTableGateway;
+        parent::__construct($oDbAdapter,$oTableGateway,$oServiceManager);
     }
 
     /**

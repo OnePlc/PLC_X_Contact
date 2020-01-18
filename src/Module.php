@@ -26,6 +26,13 @@ use Laminas\Session\Container;
 
 class Module {
     /**
+     * Module Version
+     *
+     * @since 1.0.0
+     */
+    const VERSION = '1.0.1';
+
+    /**
      * Load module config file
      *
      * @since 1.0.0
@@ -44,7 +51,7 @@ class Module {
                 # Contact Module - Base Model
                 Model\ContactTable::class => function($container) {
                     $tableGateway = $container->get(Model\ContactTableGateway::class);
-                    return new Model\ContactTable($tableGateway);
+                    return new Model\ContactTable($tableGateway,$container);
                 },
                 Model\ContactTableGateway::class => function ($container) {
                     $dbAdapter = $container->get(AdapterInterface::class);
@@ -66,14 +73,16 @@ class Module {
                     $oDbAdapter = $container->get(AdapterInterface::class);
                     return new Controller\ContactController(
                         $oDbAdapter,
-                        $container->get(Model\ContactTable::class)
+                        $container->get(Model\ContactTable::class),
+                        $container
                     );
                 },
                 Controller\ApiController::class => function($container) {
                     $oDbAdapter = $container->get(AdapterInterface::class);
                     return new Controller\ApiController(
                         $oDbAdapter,
-                        $container->get(Model\ContactTable::class)
+                        $container->get(Model\ContactTable::class),
+                        $container
                     );
                 },
             ],
