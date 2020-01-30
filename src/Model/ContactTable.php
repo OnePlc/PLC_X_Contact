@@ -43,11 +43,25 @@ class ContactTable extends CoreEntityTable {
      * Fetch All Contact Entities based on Filters
      *
      * @param bool $bPaginated
+     * @param array $aWhere
      * @return Paginator Paginated Table Connection
      * @since 1.0.0
      */
-    public function fetchAll($bPaginated = false) {
+    public function fetchAll($bPaginated = false,$aWhere = []) {
         $oSel = new Select($this->oTableGateway->getTable());
+
+        # Build where
+        $oWh = new Where();
+        foreach(array_keys($aWhere) as $sWh) {
+            $bIsLike = stripos($sWh,'-like');
+            if($bIsLike === false) {
+
+            } else {
+                # its a like
+                $oWh->like(substr($sWh,0,strlen($sWh)-strlen('-like')),$aWhere[$sWh].'%');
+            }
+        }
+        $oSel->where($oWh);
 
         # Return Paginator or Raw ResultSet based on selection
         if ($bPaginated) {
@@ -142,5 +156,24 @@ class ContactTable extends CoreEntityTable {
         $this->oTableGateway->update($aData, ['Contact_ID' => $id]);
 
         return $id;
+    }
+
+    /**
+     * Generate daily stats for contact
+     *
+     * @since 1.0.5
+     */
+    public function generateDailyStats() {
+        # get all contacts
+        $iTotal = count($this->fetchAll(false));
+        # get newly created contacts
+        $iNew = count($this->fetchAll(false,['created_date-like'=>date('Y-m-d',time())]));
+
+        # add statistics
+        CoreController::$aCoreTables['core-statistic']->insert([
+            'stats_key'=>'contact-daily',
+            'data'=>json_encode(['new'=>$iNew,'total'=>$iTotal]),
+            'date'=>date('Y-m-d H:i:s',time()),
+        ]);
     }
 }

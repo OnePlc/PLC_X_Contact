@@ -21,13 +21,10 @@ It expands on [oneplace-core](https://github.com/OnePlc/PLC_X_Core) and uses the
 
 ## Installation
 
-Copy files to webserver
-
-Init database
-
-Update config files
-
-first login with admin
+The easiest way to install onePlace Contact is via composer
+```shell script
+composer require oneplace/oneplace-contact
+```
 
 ## Getting started
 

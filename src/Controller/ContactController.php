@@ -18,6 +18,7 @@ declare(strict_types=1);
 namespace OnePlace\Contact\Controller;
 
 use Application\Controller\CoreController;
+use Application\Model\CoreEntityModel;
 use OnePlace\Contact\Model\Contact;
 use OnePlace\Contact\Model\ContactTable;
 use Laminas\View\Model\ViewModel;
@@ -39,9 +40,16 @@ class ContactController extends CoreController {
      * @since 1.0.0
      */
     public function __construct(AdapterInterface $oDbAdapter,ContactTable $oTableGateway,$oServiceManager) {
-        $this->sSingleForm = 'contact-single';
         $this->oTableGateway = $oTableGateway;
+        $this->sSingleForm = 'contact-single';
         parent::__construct($oDbAdapter,$oTableGateway,$oServiceManager);
+
+        if($oTableGateway) {
+            # Attach TableGateway to Entity Models
+            if(!isset(CoreEntityModel::$aEntityTables[$this->sSingleForm])) {
+                CoreEntityModel::$aEntityTables[$this->sSingleForm] = $oTableGateway;
+            }
+        }
     }
 
     /**
@@ -119,6 +127,9 @@ class ContactController extends CoreController {
         $iContactID = $this->oTableGateway->saveSingle($oContact);
         $oContact = $this->oTableGateway->getSingle($iContactID);
 
+        # Save Multiselect
+        $this->updateMultiSelectFields($_REQUEST,$oContact,'contact-single');
+
         # Log Performance in DB
         $aMeasureEnd = getrusage();
         $this->logPerfomance('contact-save',$this->rutime($aMeasureEnd,CoreController::$aPerfomanceLogStart,"utime"),$this->rutime($aMeasureEnd,CoreController::$aPerfomanceLogStart,"stime"));
@@ -185,6 +196,14 @@ class ContactController extends CoreController {
 
         # Save Contact
         $iContactID = $this->oTableGateway->saveSingle($oContact);
+
+        $this->layout('layout/json');
+
+        # Parse Form Data
+        $aFormData = $this->parseFormData($_REQUEST);
+
+        # Save Multiselect
+        $this->updateMultiSelectFields($aFormData,$oContact,'contact-single');
 
         # Log Performance in DB
         $aMeasureEnd = getrusage();

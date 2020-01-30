@@ -1,0 +1,93 @@
+<?php
+use Application\Controller\CoreController;
+use Laminas\ServiceManager\Exception\ServiceNotFoundException;
+use Laminas\Db\Sql\Select;
+use OnePlace\Contact\Model\ContactTable;
+
+try {
+    # Load Contact Requests from Database
+    $oContactTbl = CoreController::$oServiceManager->get(ContactTable::class);
+    $iCountLive = count($oContactTbl->fetchAll(false));
+
+    # Get Stats
+    $oStatSel = new Select(CoreController::$aCoreTables['core-statistic']->getTable());
+    $oStatSel->order('date ASC');
+    $oStatSel->where(['stats_key'=>'contact-daily']);
+    $oStatSel->limit(30);
+    $oRecentStats = CoreController::$aCoreTables['core-statistic']->selectWith($oStatSel);
+} catch(ServiceNotFoundException $e) {
+
+}
+    ?>
+
+<div class="col-md-4 col-xl-4">
+    <div class="card">
+        <div class="card-header">
+            <div class="card-actions float-right">
+                <div class="dropdown show">
+                    <a href="#" data-toggle="dropdown" data-display="static">
+                        <i class="align-middle" data-feather="more-horizontal"></i>
+                    </a>
+
+                    <div class="dropdown-menu dropdown-menu-right">
+                        <a class="dropdown-item" href="#">Something else here</a>
+                    </div>
+                </div>
+            </div>
+            <h5 class="card-title mb-0"><?=$this->translate('Contact')?> - <?=$this->translate('Info')?></h5>
+        </div>
+        <div class="card-body h-100">
+            <h3 class="badge badge-success" style="font-size:18px; background:orange !important;"><?=$iCountLive?></h3> <?=$this->translate('Contacts')?> <?=$this->translate('total')?>
+            <div class="chart">
+                <div id="contact-dailystats"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    <?php
+    $aTotalArts = [];
+    $aState1Arts = [];
+    $aDates = [];
+    $aColors = ['orange','lightblue'];
+
+    foreach($oRecentStats as $oRow) {
+        $oData = json_decode($oRow->data);
+        $aTotalArts[] = (int)$oData->total;
+        $aState1Arts[] = (int)$oData->new;
+        $aDates[] = date('d.m.Y',strtotime($oRow->date));
+    }
+    ?>
+    document.addEventListener("DOMContentLoaded", function(event) {
+        // Area chart
+        var options = {
+            chart: {
+                height: 250,
+                type: 'area',
+            },
+            dataLabels: {
+                enabled: false
+            },
+            stroke: {
+                curve: 'smooth'
+            },
+            colors: <?=json_encode($aColors)?>,
+            series: [{
+                name: 'neu',
+                data: <?=json_encode($aState1Arts)?>
+            },{
+                name: 'total',
+                data: <?=json_encode($aTotalArts)?>
+            }],
+            xaxis: {
+                type: 'string',
+                categories: <?=json_encode($aDates)?>
+            }
+        }
+        var chart = new ApexCharts(
+            document.querySelector("#contact-dailystats"),
+            options
+        );
+        chart.render();
+    });
+</script>

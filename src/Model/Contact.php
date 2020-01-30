@@ -19,8 +19,6 @@ use Application\Model\CoreEntityModel;
 
 class Contact extends CoreEntityModel {
     public $label;
-    public $firstname;
-    public $lastname;
 
     /**
      * Contact constructor.
@@ -47,23 +45,7 @@ class Contact extends CoreEntityModel {
     public function exchangeArray(array $aData) {
         $this->id = !empty($aData['Contact_ID']) ? $aData['Contact_ID'] : 0;
         $this->label = !empty($aData['label']) ? $aData['label'] : '';
-        $this->firstname = !empty($aData['firstname']) ? $aData['firstname'] : '';
-        $this->lastname = !empty($aData['lastname']) ? $aData['lastname'] : '';
 
         $this->updateDynamicFields($aData);
-    }
-
-    /**
-     * Get Entity Label as String
-     *
-     * @return string
-     * @since 1.0.0
-     */
-    public function getLabel() {
-        $sLabel = $this->firstname;
-        if($this->lastname != '') {
-            $sLabel.=' '.$this->lastname;
-        }
-        return $sLabel;
     }
 }

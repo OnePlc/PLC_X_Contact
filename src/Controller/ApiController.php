@@ -35,13 +35,12 @@ class ApiController extends CoreController {
      *
      * @param AdapterInterface $oDbAdapter
      * @param ContactTable $oTableGateway
-     * @param $oServiceManager
      * @since 1.0.0
      */
     public function __construct(AdapterInterface $oDbAdapter,ContactTable $oTableGateway,$oServiceManager) {
+        parent::__construct($oDbAdapter,$oTableGateway,$oServiceManager);
         $this->oTableGateway = $oTableGateway;
         $this->sSingleForm = 'contact-single';
-        parent::__construct($oDbAdapter,$oTableGateway,$oServiceManager);
     }
 
     /**
@@ -73,12 +72,12 @@ class ApiController extends CoreController {
         /**
          * todo: enforce to use /api/contact instead of /contact/api so we can do security checks in main api controller
         if(!\Application\Controller\ApiController::$bSecurityCheckPassed) {
-            # Print List with all Entities
-            $aReturn = ['state'=>'error','message'=>'no direct access allowed','aItems'=>[]];
-            echo json_encode($aReturn);
-            return false;
+        # Print List with all Entities
+        $aReturn = ['state'=>'error','message'=>'no direct access allowed','aItems'=>[]];
+        echo json_encode($aReturn);
+        return false;
         }
-        **/
+         **/
 
         $aItems = [];
 
