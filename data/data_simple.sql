@@ -8,9 +8,9 @@ INSERT INTO `core_form_field` (`Field_ID`, `type`, `label`, `fieldkey`, `tab`, `
 (NULL, 'email', 'E-Mail (business)', 'email_addr', 'contact-base', 'contact-single', 'col-md-3', '', '/contact/view/##ID##', '0', '1', '0', '', '', ''),
 (NULL, 'text', 'Phone (business)', 'phone', 'contact-base', 'contact-single', 'col-md-3', '', '/contact/view/##ID##', '0', '1', '0', '', '', ''),
 (NULL, 'featuredimage', 'Featured Image', 'featured_image', 'contact-base', 'contact-single', 'col-md-3', '', '', '0', '1', '0', '', '', ''),
-(NULL, 'multiselect', 'Categories', 'category_idfs', 'contact-base', 'contact-single', 'col-md-3', '', '', 0, 1, 0, 'entitytag-single', 'OnePlace\\Tag\\Model\\EntityTagTable', 'add-OnePlace\\Tag\\Controller\\TagController'),
-(NULL, 'select', 'Salution', 'salution_idfs', 'contact-base', 'contact-single', 'col-md-3', '', '', 0, 1, 0, 'entitytag-single', 'OnePlace\\Tag\\Model\\EntityTagTable', 'add-OnePlace\\Tag\\Controller\\TagController'),
-(NULL, 'select', 'Title', 'title_idfs', 'contact-base', 'contact-single', 'col-md-3', '', '', 0, 1, 0, 'entitytag-single', 'OnePlace\\Tag\\Model\\EntityTagTable', 'add-OnePlace\\Tag\\Controller\\TagController');
+(NULL, 'multiselect', 'Categories', 'category_idfs', 'contact-base', 'contact-single', 'col-md-3', '', '', 0, 1, 0, 'entitytag-single', 'OnePlace\\Tag\\Model\\EntityTagTable', 'add-OnePlace\\Tag\\Controller\\CategoryController'),
+(NULL, 'select', 'Salution', 'salution_idfs', 'contact-base', 'contact-single', 'col-md-3', '', '', 0, 1, 0, 'entitytag-single', 'OnePlace\\Tag\\Model\\EntityTagTable', 'add-OnePlace\\Tag\\Controller\\SalutionController'),
+(NULL, 'select', 'Title', 'title_idfs', 'contact-base', 'contact-single', 'col-md-3', '', '', 0, 1, 0, 'entitytag-single', 'OnePlace\\Tag\\Model\\EntityTagTable', 'add-OnePlace\\Tag\\Controller\\TitleController');
 
 --
 -- Core Form - Contact History Fields
@@ -42,7 +42,11 @@ INSERT INTO `core_form_field` (`Field_ID`, `type`, `label`, `fieldkey`, `tab`, `
 --
 INSERT INTO `core_form_tab` (`Tab_ID`, `form`, `title`, `subtitle`, `icon`, `counter`, `sort_id`, `filter_check`, `filter_value`) VALUES
 ('contact-history', 'contact-single', 'History', '', 'fas fa-history', '', '1', '', ''),
-('contact-basket', 'basket-single', 'Basket', '', 'fas fa-shopping-basket', '', '1', '', ''),
-('contact-job', 'basket-single', 'Job', '', 'fas fa-job', '', '1', '', ''),
-('contact-shoprequest', 'basket-single', 'Shop', 'request', 'fas fa-request', '', '1', '', '');
+('contact-basket', 'contact-single', 'Basket', '', 'fas fa-shopping-basket', '', '1', '', ''),
+('contact-job', 'contact-single', 'Job', '', 'fas fa-job', '', '1', '', ''),
+('contact-shoprequest', 'contact-single', 'Shoprequest', 'request', 'fas fa-request', '', '1', '', '');
 
+INSERT INTO `permission` (`permission_key`, `module`, `label`, `nav_label`, `nav_href`, `show_in_menu`) VALUES
+('add', 'OnePlace\\Tag\\Controller\\CategoryController', 'Add Category', '', '', 0),
+('add', 'OnePlace\\Tag\\Controller\\SalutionController', 'Add Salution', '', '', 0),
+('add', 'OnePlace\\Tag\\Controller\\TitleController', 'Add Title', '', '', 0);
