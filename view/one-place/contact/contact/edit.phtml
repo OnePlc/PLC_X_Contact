@@ -1,3 +1,2 @@
-<h2>Edit Contact</h2>
-
-<?= $this->partial('partial/basicform', ['sFormName'=>$sFormName,'oItem'=>$oContact]); ?>
+<?= $this->partial('partial/formheader',['sTitle'=>'Edit Contact '.$oItem->getLabel()]) ?>
+<?= $this->partial('partial/basicform', ['sFormName'=>$sFormName,'oItem'=>$oItem]); ?>

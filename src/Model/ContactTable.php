@@ -61,6 +61,11 @@ class ContactTable extends CoreEntityTable {
                 $oWh->like(substr($sWh,0,strlen($sWh)-strlen('-like')),$aWhere[$sWh].'%');
             }
         }
+        if(array_key_exists('multi_tag',$aWhere)) {
+            $oSel->join(['category_tag'=>'core_entity_tag_entity'],'category_tag.entity_idfs = article.Article_ID');
+            $oWh->equalTo('category_tag.entity_tag_idfs',$aWhere['multi_tag']);
+            $oWh->like('category_tag.entity_type',explode('-',$this->sSingleForm)[0]);
+        }
         $oSel->where($oWh);
 
         # Return Paginator or Raw ResultSet based on selection
@@ -91,12 +96,13 @@ class ContactTable extends CoreEntityTable {
      * Get Contact Entity
      *
      * @param int $id
+     * @param string $sKey custom key
      * @return mixed
      * @since 1.0.0
      */
-    public function getSingle($id) {
+    public function getSingle($id,$sKey = 'Contact_ID') {
         $id = (int) $id;
-        $rowset = $this->oTableGateway->select(['Contact_ID' => $id]);
+        $rowset = $this->oTableGateway->select([$sKey => $id]);
         $row = $rowset->current();
         if (! $row) {
             throw new \RuntimeException(sprintf(
@@ -175,5 +181,9 @@ class ContactTable extends CoreEntityTable {
             'data'=>json_encode(['new'=>$iNew,'total'=>$iTotal]),
             'date'=>date('Y-m-d H:i:s',time()),
         ]);
+    }
+
+    public function generateNew() {
+        return new Contact($this->oTableGateway->getAdapter());
     }
 }

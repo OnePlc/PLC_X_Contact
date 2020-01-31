@@ -23,14 +23,16 @@ use Laminas\ModuleManager\ModuleManager;
 use Laminas\Session\Config\StandardConfig;
 use Laminas\Session\SessionManager;
 use Laminas\Session\Container;
+use Application\Controller\CoreEntityController;
+use OnePlace\Contact\Controller\PluginController;
 
 class Module {
     /**
      * Module Version
      *
-     * @since 1.0.6
+     * @since 1.0.0
      */
-    const VERSION = '1.0.1';
+    const VERSION = '1.0.2';
 
     /**
      * Load module config file
@@ -69,17 +71,49 @@ class Module {
     public function getControllerConfig() : array {
         return [
             'factories' => [
+                # Plugin Example Controller
+                Controller\PluginController::class => function($container) {
+                    $oDbAdapter = $container->get(AdapterInterface::class);
+                    return new Controller\PluginController(
+                        $oDbAdapter,
+                        $container->get(Model\ContactTable::class),
+                        $container
+                    );
+                },
+                # Contact Main Controller
                 Controller\ContactController::class => function($container) {
                     $oDbAdapter = $container->get(AdapterInterface::class);
+                    $tableGateway = $container->get(Model\ContactTable::class);
+                    # hook plugin
+                    CoreEntityController::addHook('contact-add-before',(object)['sFunction'=>'testFunction','oItem'=>new PluginController($oDbAdapter,$tableGateway,$container)]);
                     return new Controller\ContactController(
                         $oDbAdapter,
                         $container->get(Model\ContactTable::class),
                         $container
                     );
                 },
+                # Api Plugin
                 Controller\ApiController::class => function($container) {
                     $oDbAdapter = $container->get(AdapterInterface::class);
                     return new Controller\ApiController(
+                        $oDbAdapter,
+                        $container->get(Model\ContactTable::class),
+                        $container
+                    );
+                },
+                # Export Plugin
+                Controller\ExportController::class => function($container) {
+                    $oDbAdapter = $container->get(AdapterInterface::class);
+                    return new Controller\ExportController(
+                        $oDbAdapter,
+                        $container->get(Model\ContactTable::class),
+                        $container
+                    );
+                },
+                # Search Plugin
+                Controller\SearchController::class => function($container) {
+                    $oDbAdapter = $container->get(AdapterInterface::class);
+                    return new Controller\SearchController(
                         $oDbAdapter,
                         $container->get(Model\ContactTable::class),
                         $container

@@ -17,20 +17,20 @@ declare(strict_types=1);
 
 namespace OnePlace\Contact\Controller;
 
-use Application\Controller\CoreController;
+use Application\Controller\CoreEntityController;
 use Application\Model\CoreEntityModel;
 use OnePlace\Contact\Model\Contact;
 use OnePlace\Contact\Model\ContactTable;
 use Laminas\View\Model\ViewModel;
 use Laminas\Db\Adapter\AdapterInterface;
 
-class ContactController extends CoreController {
+class ContactController extends CoreEntityController {
     /**
      * Contact Table Object
      *
      * @since 1.0.0
      */
-    private $oTableGateway;
+    protected $oTableGateway;
 
     /**
      * ContactController constructor.
@@ -59,30 +59,10 @@ class ContactController extends CoreController {
      * @return ViewModel - View Object with Data from Controller
      */
     public function indexAction() {
-        # Set Layout based on users theme
-        $this->setThemeBasedLayout('contact');
 
-        # Add Buttons for breadcrumb
-        $this->setViewButtons('contact-index');
-
-        # Set Table Rows for Index
-        $this->setIndexColumns('contact-index');
-
-        # Get Paginator
-        $oPaginator = $this->oTableGateway->fetchAll(true);
-        $iPage = (int) $this->params()->fromQuery('page', 1);
-        $iPage = ($iPage < 1) ? 1 : $iPage;
-        $oPaginator->setCurrentPageNumber($iPage);
-        $oPaginator->setItemCountPerPage(3);
-
-        # Log Performance in DB
-        $aMeasureEnd = getrusage();
-        $this->logPerfomance('contact-index',$this->rutime($aMeasureEnd,CoreController::$aPerfomanceLogStart,"utime"),$this->rutime($aMeasureEnd,CoreController::$aPerfomanceLogStart,"stime"));
-
-        return new ViewModel([
-            'sTableName'=>'contact-index',
-            'aItems'=>$oPaginator,
-        ]);
+        # You can just use the default function and customize it via hooks
+        # or replace the entire function if you need more customization
+        return $this->generateIndexView('contact');
     }
 
     /**
@@ -92,51 +72,17 @@ class ContactController extends CoreController {
      * @return ViewModel - View Object with Data from Controller
      */
     public function addAction() {
-        # Set Layout based on users theme
-        $this->setThemeBasedLayout('contact');
-
-        # Get Request to decide wether to save or display form
-        $oRequest = $this->getRequest();
-
-        # Display Add Form
-        if(!$oRequest->isPost()) {
-            # Add Buttons for breadcrumb
-            $this->setViewButtons('contact-single');
-
-            # Load Tabs for View Form
-            $this->setViewTabs($this->sSingleForm);
-
-            # Load Fields for View Form
-            $this->setFormFields($this->sSingleForm);
-
-            # Log Performance in DB
-            $aMeasureEnd = getrusage();
-            $this->logPerfomance('contact-add',$this->rutime($aMeasureEnd,CoreController::$aPerfomanceLogStart,"utime"),$this->rutime($aMeasureEnd,CoreController::$aPerfomanceLogStart,"stime"));
-
-            return new ViewModel([
-                'sFormName' => $this->sSingleForm,
-            ]);
-        }
-
-        # Get and validate Form Data
-        $aFormData = $this->parseFormData($_REQUEST);
-
-        # Save Add Form
-        $oContact = new Contact($this->oDbAdapter);
-        $oContact->exchangeArray($aFormData);
-        $iContactID = $this->oTableGateway->saveSingle($oContact);
-        $oContact = $this->oTableGateway->getSingle($iContactID);
-
-        # Save Multiselect
-        $this->updateMultiSelectFields($_REQUEST,$oContact,'contact-single');
-
-        # Log Performance in DB
-        $aMeasureEnd = getrusage();
-        $this->logPerfomance('contact-save',$this->rutime($aMeasureEnd,CoreController::$aPerfomanceLogStart,"utime"),$this->rutime($aMeasureEnd,CoreController::$aPerfomanceLogStart,"stime"));
-
-        # Display Success Message and View New Contact
-        $this->flashMessenger()->addSuccessMessage('Contact successfully created');
-        return $this->redirect()->toRoute('contact',['action'=>'view','id'=>$iContactID]);
+        /**
+         * You can just use the default function and customize it via hooks
+         * or replace the entire function if you need more customization
+         *
+         * Hooks available:
+         *
+         * contact-add-before (before show add form)
+         * contact-add-before-save (before save)
+         * contact-add-after-save (after save)
+         */
+        return $this->generateAddView('contact');
     }
 
     /**
@@ -146,72 +92,17 @@ class ContactController extends CoreController {
      * @return ViewModel - View Object with Data from Controller
      */
     public function editAction() {
-        # Set Layout based on users theme
-        $this->setThemeBasedLayout('contact');
-
-        # Get Request to decide wether to save or display form
-        $oRequest = $this->getRequest();
-
-        # Display Edit Form
-        if(!$oRequest->isPost()) {
-
-            # Get Contact ID from URL
-            $iContactID = $this->params()->fromRoute('id', 0);
-
-            # Try to get Contact
-            try {
-                $oContact = $this->oTableGateway->getSingle($iContactID);
-            } catch (\RuntimeException $e) {
-                echo 'Contact Not found';
-                return false;
-            }
-
-            # Attach Contact Entity to Layout
-            $this->setViewEntity($oContact);
-
-            # Add Buttons for breadcrumb
-            $this->setViewButtons('contact-single');
-
-            # Load Tabs for View Form
-            $this->setViewTabs($this->sSingleForm);
-
-            # Load Fields for View Form
-            $this->setFormFields($this->sSingleForm);
-
-            # Log Performance in DB
-            $aMeasureEnd = getrusage();
-            $this->logPerfomance('contact-edit',$this->rutime($aMeasureEnd,CoreController::$aPerfomanceLogStart,"utime"),$this->rutime($aMeasureEnd,CoreController::$aPerfomanceLogStart,"stime"));
-
-            return new ViewModel([
-                'sFormName' => $this->sSingleForm,
-                'oContact' => $oContact,
-            ]);
-        }
-
-        $iContactID = $oRequest->getPost('Item_ID');
-        $oContact = $this->oTableGateway->getSingle($iContactID);
-
-        # Update Contact with Form Data
-        $oContact = $this->attachFormData($_REQUEST,$oContact);
-
-        # Save Contact
-        $iContactID = $this->oTableGateway->saveSingle($oContact);
-
-        $this->layout('layout/json');
-
-        # Parse Form Data
-        $aFormData = $this->parseFormData($_REQUEST);
-
-        # Save Multiselect
-        $this->updateMultiSelectFields($aFormData,$oContact,'contact-single');
-
-        # Log Performance in DB
-        $aMeasureEnd = getrusage();
-        $this->logPerfomance('contact-save',$this->rutime($aMeasureEnd,CoreController::$aPerfomanceLogStart,"utime"),$this->rutime($aMeasureEnd,CoreController::$aPerfomanceLogStart,"stime"));
-
-        # Display Success Message and View New User
-        $this->flashMessenger()->addSuccessMessage('Contact successfully saved');
-        return $this->redirect()->toRoute('contact',['action'=>'view','id'=>$iContactID]);
+        /**
+         * You can just use the default function and customize it via hooks
+         * or replace the entire function if you need more customization
+         *
+         * Hooks available:
+         *
+         * contact-edit-before (before show edit form)
+         * contact-edit-before-save (before save)
+         * contact-edit-after-save (after save)
+         */
+        return $this->generateEditView('contact');
     }
 
     /**
@@ -221,39 +112,14 @@ class ContactController extends CoreController {
      * @return ViewModel - View Object with Data from Controller
      */
     public function viewAction() {
-        # Set Layout based on users theme
-        $this->setThemeBasedLayout('contact');
-
-        # Get Contact ID from URL
-        $iContactID = $this->params()->fromRoute('id', 0);
-
-        # Try to get Contact
-        try {
-            $oContact = $this->oTableGateway->getSingle($iContactID);
-        } catch (\RuntimeException $e) {
-            echo 'Contact Not found';
-            return false;
-        }
-
-        # Attach Contact Entity to Layout
-        $this->setViewEntity($oContact);
-
-        # Add Buttons for breadcrumb
-        $this->setViewButtons('contact-view');
-
-        # Load Tabs for View Form
-        $this->setViewTabs($this->sSingleForm);
-
-        # Load Fields for View Form
-        $this->setFormFields($this->sSingleForm);
-
-        # Log Performance in DB
-        $aMeasureEnd = getrusage();
-        $this->logPerfomance('contact-view',$this->rutime($aMeasureEnd,CoreController::$aPerfomanceLogStart,"utime"),$this->rutime($aMeasureEnd,CoreController::$aPerfomanceLogStart,"stime"));
-
-        return new ViewModel([
-            'sFormName'=>$this->sSingleForm,
-            'oContact'=>$oContact,
-        ]);
+        /**
+         * You can just use the default function and customize it via hooks
+         * or replace the entire function if you need more customization
+         *
+         * Hooks available:
+         *
+         * contact-view-before
+         */
+        return $this->generateViewView('contact');
     }
 }

@@ -24,7 +24,9 @@ INSERT INTO `permission` (`permission_key`, `module`, `label`, `nav_label`, `nav
 ('edit', 'OnePlace\\Contact\\Controller\\ContactController', 'Edit', '', '', 0),
 ('index', 'OnePlace\\Contact\\Controller\\ContactController', 'Index', 'Contacts', '/contact', 1),
 ('list', 'OnePlace\\Contact\\Controller\\ApiController', 'List', '', '', 1),
-('view', 'OnePlace\\Contact\\Controller\\ContactController', 'View', '', '', 0);
+('view', 'OnePlace\\Contact\\Controller\\ContactController', 'View', '', '', 0),
+('dump', 'OnePlace\\Contact\\Controller\\ExportController', 'Excel Dump', '', '', 0),
+('index', 'OnePlace\\Contact\\Controller\\SearchController', 'Search', '', '', 0);
 
 --
 -- Form
@@ -49,7 +51,11 @@ INSERT INTO `core_form_tab` (`Tab_ID`, `form`, `title`, `subtitle`, `icon`, `cou
 INSERT INTO `core_form_button` (`Button_ID`, `label`, `icon`, `title`, `href`, `class`, `append`, `form`, `mode`, `filter_check`, `filter_value`) VALUES
 (NULL, 'Save Contact', 'fas fa-save', 'Save Contact', '#', 'primary saveForm', '', 'contact-single', 'link', '', ''),
 (NULL, 'Edit Contact', 'fas fa-edit', 'Edit Contact', '/contact/edit/##ID##', 'primary', '', 'contact-view', 'link', '', ''),
-(NULL, 'Add Contact', 'fas fa-plus', 'Add Contact', '/contact/add', 'primary', '', 'contact-index', 'link', '', '');
+(NULL, 'Add Contact', 'fas fa-plus', 'Add Contact', '/contact/add', 'primary', '', 'contact-index', 'link', '', ''),
+(NULL, 'Export Contacts', 'fas fa-file-excel', 'Export Contacts', '/contact/export', 'primary', '', 'contact-index', 'link', '', ''),
+(NULL, 'Find Contacts', 'fas fa-searh', 'Find Contacts', '/contact/search', 'primary', '', 'contact-index', 'link', '', ''),
+(NULL, 'Export Contacts', 'fas fa-file-excel', 'Export Contacts', '#', 'primary initExcelDump', '', 'contact-search', 'link', '', ''),
+(NULL, 'New Search', 'fas fa-searh', 'New Search', '/contact/search', 'primary', '', 'contact-search', 'link', '', '');
 
 --
 -- Fields
