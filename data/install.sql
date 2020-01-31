@@ -23,7 +23,7 @@ INSERT INTO `permission` (`permission_key`, `module`, `label`, `nav_label`, `nav
 ('add', 'OnePlace\\Contact\\Controller\\ContactController', 'Add', '', '', 0),
 ('edit', 'OnePlace\\Contact\\Controller\\ContactController', 'Edit', '', '', 0),
 ('index', 'OnePlace\\Contact\\Controller\\ContactController', 'Index', 'Contacts', '/contact', 1),
-('list', 'OnePlace\\Contact\\Controller\\ApiController', 'List', '', '', 1),
+('list', 'OnePlace\\Contact\\Controller\\ApiController', 'List', '', '', 0),
 ('view', 'OnePlace\\Contact\\Controller\\ContactController', 'View', '', '', 0),
 ('dump', 'OnePlace\\Contact\\Controller\\ExportController', 'Excel Dump', '', '', 0),
 ('index', 'OnePlace\\Contact\\Controller\\SearchController', 'Search', '', '', 0);
