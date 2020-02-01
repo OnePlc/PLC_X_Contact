@@ -2,17 +2,17 @@
 use Application\Controller\CoreController;
 use Laminas\ServiceManager\Exception\ServiceNotFoundException;
 use Laminas\Db\Sql\Select;
-use OnePlace\Skeleton\Model\SkeletonTable;
+use OnePlace\Article\Model\ArticleTable;
 
 try {
-    # Load Skeleton Requests from Database
-    $oSkeletonTbl = CoreController::$oServiceManager->get(SkeletonTable::class);
-    $iCountLive = count($oSkeletonTbl->fetchAll(false));
+    # Load Article Requests from Database
+    $oArticleTbl = CoreController::$oServiceManager->get(ArticleTable::class);
+    $iCountLive = count($oArticleTbl->fetchAll(false));
 
     # Get Stats
     $oStatSel = new Select(CoreController::$aCoreTables['core-statistic']->getTable());
     $oStatSel->order('date ASC');
-    $oStatSel->where(['stats_key'=>'skeleton-daily']);
+    $oStatSel->where(['stats_key'=>'article-daily']);
     $oStatSel->limit(30);
     $oRecentStats = CoreController::$aCoreTables['core-statistic']->selectWith($oStatSel);
 } catch(ServiceNotFoundException $e) {
@@ -34,12 +34,12 @@ try {
                     </div>
                 </div>
             </div>
-            <h5 class="card-title mb-0"><?=$this->translate('Skeleton')?> - <?=$this->translate('Info')?></h5>
+            <h5 class="card-title mb-0"><?=$this->translate('Article')?> - <?=$this->translate('Info')?></h5>
         </div>
         <div class="card-body h-100">
-            <h3 class="badge badge-success" style="font-size:18px; background:orange !important;"><?=$iCountLive?></h3> <?=$this->translate('Skeletons')?> <?=$this->translate('total')?>
+            <h3 class="badge badge-success" style="font-size:18px; background:orange !important;"><?=$iCountLive?></h3> <?=$this->translate('Articles')?> <?=$this->translate('total')?>
             <div class="chart">
-                <div id="skeleton-dailystats"></div>
+                <div id="article-dailystats"></div>
             </div>
         </div>
     </div>
@@ -85,7 +85,7 @@ try {
             }
         }
         var chart = new ApexCharts(
-            document.querySelector("#skeleton-dailystats"),
+            document.querySelector("#article-dailystats"),
             options
         );
         chart.render();

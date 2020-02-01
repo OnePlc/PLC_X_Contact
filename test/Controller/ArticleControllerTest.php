@@ -1,11 +1,11 @@
 <?php
 /**
- * SkeletonControllerTest.php - Main Controller Test Class
+ * ArticleControllerTest.php - Main Controller Test Class
  *
- * Test Class for Main Controller of Skeleton Module
+ * Test Class for Main Controller of Article Module
  *
  * @category Test
- * @package Skeleton
+ * @package Article
  * @author Verein onePlace
  * @copyright (C) 2020  Verein onePlace <admin@1plc.ch>
  * @license https://opensource.org/licenses/BSD-3-Clause
@@ -15,16 +15,16 @@
 
 declare(strict_types=1);
 
-namespace OnePlaceTest\Skeleton\Controller;
+namespace OnePlaceTest\Article\Controller;
 
-use OnePlace\Skeleton\Controller\SkeletonController;
+use OnePlace\Article\Controller\ArticleController;
 use Laminas\Stdlib\ArrayUtils;
 use Laminas\Test\PHPUnit\Controller\AbstractHttpControllerTestCase;
 use Laminas\Session\Container;
 use User\Model\TestUser;
 use Laminas\Db\Adapter\AdapterInterface;
 
-class SkeletonControllerTest extends AbstractHttpControllerTestCase {
+class ArticleControllerTest extends AbstractHttpControllerTestCase {
     public function setUp() : void {
         // The module configuration should still be applicable for tests.
         // You can override configuration here with test case specific values,
@@ -33,7 +33,7 @@ class SkeletonControllerTest extends AbstractHttpControllerTestCase {
         $configOverrides = [];
         $this->setApplicationConfig([
             // Retrieve list of modules used in this application.
-            'modules' => ['OnePlace\Skeleton'],
+            'modules' => ['OnePlace\Article'],
 
             // These are various options for the listeners attached to the ModuleManager
             'module_listener_options' => [
@@ -80,36 +80,36 @@ class SkeletonControllerTest extends AbstractHttpControllerTestCase {
     public function testIndexActionCanBeAccessed() {
         $this->initFakeTestSession();
 
-        $this->dispatch('/skeleton', 'GET');
+        $this->dispatch('/article', 'GET');
         $this->assertResponseStatusCode(200);
-        $this->assertModuleName('skeleton');
-        $this->assertControllerName(SkeletonController::class); // as specified in router's controller name alias
-        $this->assertControllerClass('SkeletonController');
-        $this->assertMatchedRouteName('skeleton');
+        $this->assertModuleName('article');
+        $this->assertControllerName(ArticleController::class); // as specified in router's controller name alias
+        $this->assertControllerClass('ArticleController');
+        $this->assertMatchedRouteName('article');
     }
 
     public function testIndexActionViewModelTemplateRenderedWithinLayout() {
         $this->initFakeTestSession();
 
-        $this->dispatch('/skeleton', 'GET');
+        $this->dispatch('/article', 'GET');
         $this->assertQuery('.container h1');
     }
 
     public function testAddActionCanBeAccessed() {
         $this->initFakeTestSession();
 
-        $this->dispatch('/skeleton/add', 'GET');
+        $this->dispatch('/article/add', 'GET');
         $this->assertResponseStatusCode(200);
-        $this->assertModuleName('skeleton');
-        $this->assertControllerName(SkeletonController::class); // as specified in router's controller name alias
-        $this->assertControllerClass('SkeletonController');
-        $this->assertMatchedRouteName('skeleton');
+        $this->assertModuleName('article');
+        $this->assertControllerName(ArticleController::class); // as specified in router's controller name alias
+        $this->assertControllerClass('ArticleController');
+        $this->assertMatchedRouteName('article');
     }
 
     public function testAddActionViewModelTemplateRenderedWithinLayout() {
         $this->initFakeTestSession();
 
-        $this->dispatch('/skeleton/add', 'GET');
+        $this->dispatch('/article/add', 'GET');
 
         # Check if view is loading
         $this->assertQuery('.container h1');
@@ -121,18 +121,18 @@ class SkeletonControllerTest extends AbstractHttpControllerTestCase {
     public function testEditActionCanBeAccessed() {
         $this->initFakeTestSession();
 
-        $this->dispatch('/skeleton/edit/1', 'GET');
+        $this->dispatch('/article/edit/1', 'GET');
         $this->assertResponseStatusCode(200);
-        $this->assertModuleName('skeleton');
-        $this->assertControllerName(SkeletonController::class); // as specified in router's controller name alias
-        $this->assertControllerClass('SkeletonController');
-        $this->assertMatchedRouteName('skeleton');
+        $this->assertModuleName('article');
+        $this->assertControllerName(ArticleController::class); // as specified in router's controller name alias
+        $this->assertControllerClass('ArticleController');
+        $this->assertMatchedRouteName('article');
     }
 
     public function testEditActionViewModelTemplateRenderedWithinLayout() {
         $this->initFakeTestSession();
 
-        $this->dispatch('/skeleton/edit/1', 'GET');
+        $this->dispatch('/article/edit/1', 'GET');
         $this->assertQuery('.container h2');
 
         # check if form partial is loading
@@ -142,18 +142,18 @@ class SkeletonControllerTest extends AbstractHttpControllerTestCase {
     public function testViewActionCanBeAccessed() {
         $this->initFakeTestSession();
 
-        $this->dispatch('/skeleton/view/1', 'GET');
+        $this->dispatch('/article/view/1', 'GET');
         $this->assertResponseStatusCode(200);
-        $this->assertModuleName('skeleton');
-        $this->assertControllerName(SkeletonController::class); // as specified in router's controller name alias
-        $this->assertControllerClass('SkeletonController');
-        $this->assertMatchedRouteName('skeleton');
+        $this->assertModuleName('article');
+        $this->assertControllerName(ArticleController::class); // as specified in router's controller name alias
+        $this->assertControllerClass('ArticleController');
+        $this->assertMatchedRouteName('article');
     }
 
     public function testViewActionViewModelTemplateRenderedWithinLayout() {
         $this->initFakeTestSession();
 
-        $this->dispatch('/skeleton/view/1', 'GET');
+        $this->dispatch('/article/view/1', 'GET');
         # Check if view is loading
         $this->assertQuery('.container h2');
 

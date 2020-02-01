@@ -1,11 +1,11 @@
 <?php
 /**
- * SearchController.php - Skeleton Search Controller
+ * SearchController.php - Article Search Controller
  *
- * Main Controller for Skeleton Search
+ * Main Controller for Article Search
  *
  * @category Controller
- * @package Skeleton
+ * @package Article
  * @author Verein onePlace
  * @copyright (C) 2020  Verein onePlace <admin@1plc.ch>
  * @license https://opensource.org/licenses/BSD-3-Clause
@@ -13,10 +13,10 @@
  * @since 1.0.5
  */
 
-namespace OnePlace\Skeleton\Controller;
+namespace OnePlace\Article\Controller;
 
 use Application\Controller\CoreSearchController;
-use OnePlace\Skeleton\Model\SkeletonTable;
+use OnePlace\Article\Model\ArticleTable;
 use Laminas\Db\Sql\Where;
 use Laminas\View\Model\ViewModel;
 use Laminas\Db\Adapter\AdapterInterface;
@@ -43,15 +43,15 @@ class SearchController extends CoreSearchController
      * ApiController constructor.
      *
      * @param AdapterInterface $oDbAdapter
-     * @param SkeletonTable $oTableGateway
+     * @param ArticleTable $oTableGateway
      * @since 1.0.0
      */
-    public function __construct(AdapterInterface $oDbAdapter,SkeletonTable $oTableGateway,$oServiceManager) {
+    public function __construct(AdapterInterface $oDbAdapter,ArticleTable $oTableGateway,$oServiceManager) {
         parent::__construct($oDbAdapter,$oTableGateway,$oServiceManager);
     }
 
     /**
-     * Dump Skeleton data to desired format
+     * Dump Article data to desired format
      *
      * @return bool
      * @since 1.0.5
@@ -63,10 +63,10 @@ class SearchController extends CoreSearchController
          *
          * Hooks available:
          *
-         * skeleton-search-before (before show search form)
-         * skeleton-search-before-execute (before query)
-         * skeleton-search-after-execute (after query - before show results)
+         * article-search-before (before show search form)
+         * article-search-before-execute (before query)
+         * article-search-after-execute (after query - before show results)
          */
-        return $this->generateSearchView('skeleton');
+        return $this->generateSearchView('article');
     }
 }

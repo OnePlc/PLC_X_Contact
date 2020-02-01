@@ -1,11 +1,11 @@
 <?php
 /**
- * SkeletonTable.php - Skeleton Table
+ * ArticleTable.php - Article Table
  *
- * Table Model for Skeleton
+ * Table Model for Article
  *
  * @category Model
- * @package Skeleton
+ * @package Article
  * @author Verein onePlace
  * @copyright (C) 2020 Verein onePlace <admin@1plc.ch>
  * @license https://opensource.org/licenses/BSD-3-Clause
@@ -13,7 +13,7 @@
  * @since 1.0.0
  */
 
-namespace OnePlace\Skeleton\Model;
+namespace OnePlace\Article\Model;
 
 use Application\Controller\CoreController;
 use Application\Model\CoreEntityTable;
@@ -24,10 +24,10 @@ use Laminas\Db\Sql\Where;
 use Laminas\Paginator\Paginator;
 use Laminas\Paginator\Adapter\DbSelect;
 
-class SkeletonTable extends CoreEntityTable {
+class ArticleTable extends CoreEntityTable {
 
     /**
-     * SkeletonTable constructor.
+     * ArticleTable constructor.
      *
      * @param TableGateway $tableGateway
      * @since 1.0.0
@@ -36,11 +36,11 @@ class SkeletonTable extends CoreEntityTable {
         parent::__construct($tableGateway);
 
         # Set Single Form Name
-        $this->sSingleForm = 'skeleton-single';
+        $this->sSingleForm = 'article-single';
     }
 
     /**
-     * Get Skeleton Entity
+     * Get Article Entity
      *
      * @param int $id
      * @return mixed
@@ -48,24 +48,24 @@ class SkeletonTable extends CoreEntityTable {
      */
     public function getSingle($id) {
         # Use core function
-        return $this->getSingleEntity($id,'Skeleton_ID');
+        return $this->getSingleEntity($id,'Article_ID');
     }
 
     /**
-     * Save Skeleton Entity
+     * Save Article Entity
      *
-     * @param Skeleton $oSkeleton
-     * @return int Skeleton ID
+     * @param Article $oArticle
+     * @return int Article ID
      * @since 1.0.0
      */
-    public function saveSingle(Skeleton $oSkeleton) {
+    public function saveSingle(Article $oArticle) {
         $aData = [
-            'label' => $oSkeleton->label,
+            'label' => $oArticle->label,
         ];
 
-        $aData = $this->attachDynamicFields($aData,$oSkeleton);
+        $aData = $this->attachDynamicFields($aData,$oArticle);
 
-        $id = (int) $oSkeleton->id;
+        $id = (int) $oArticle->id;
 
         if ($id === 0) {
             # Add Metadata
@@ -74,19 +74,19 @@ class SkeletonTable extends CoreEntityTable {
             $aData['modified_by'] = CoreController::$oSession->oUser->getID();
             $aData['modified_date'] = date('Y-m-d H:i:s',time());
 
-            # Insert Skeleton
+            # Insert Article
             $this->oTableGateway->insert($aData);
 
             # Return ID
             return $this->oTableGateway->lastInsertValue;
         }
 
-        # Check if Skeleton Entity already exists
+        # Check if Article Entity already exists
         try {
             $this->getSingle($id);
         } catch (\RuntimeException $e) {
             throw new \RuntimeException(sprintf(
-                'Cannot update skeleton with identifier %d; does not exist',
+                'Cannot update article with identifier %d; does not exist',
                 $id
             ));
         }
@@ -95,8 +95,8 @@ class SkeletonTable extends CoreEntityTable {
         $aData['modified_by'] = CoreController::$oSession->oUser->getID();
         $aData['modified_date'] = date('Y-m-d H:i:s',time());
 
-        # Update Skeleton
-        $this->oTableGateway->update($aData, ['Skeleton_ID' => $id]);
+        # Update Article
+        $this->oTableGateway->update($aData, ['Article_ID' => $id]);
 
         return $id;
     }
@@ -104,10 +104,10 @@ class SkeletonTable extends CoreEntityTable {
     /**
      * Generate new single Entity
      *
-     * @return Skeleton
+     * @return Article
      * @since 1.0.7
      */
     public function generateNew() {
-        return new Skeleton($this->oTableGateway->getAdapter());
+        return new Article($this->oTableGateway->getAdapter());
     }
 }
