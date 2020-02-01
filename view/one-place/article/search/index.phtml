@@ -2,7 +2,7 @@
     <div class="col-md-12">
         <div class="card">
             <div class="card-header">
-                <h2>Find Contact</h2>
+                <h2>Find Article</h2>
             </div>
             <?php if(isset($aResults)) { ?>
 
@@ -28,7 +28,18 @@
                     <h2>Results</h2>
                 </div>
                 <div class="card-body">
-
+                    <ul class="list-group">
+                    <?php
+                    foreach($aResults as $oArticle) { ?>
+                        <li class="list-group-item">
+                            <a href="<?=$this->url('article',['action'=>'view','id'=>$oArticle->getID()])?>" title="<?=$this->translate('View Article')?>">
+                                <?=$oArticle->getLabel();?>
+                            </a>
+                        </li>
+                    <?php
+                    }
+                    ?>
+                    </ul>
                 </div>
             </div>
         </div>

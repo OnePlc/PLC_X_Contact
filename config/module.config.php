@@ -1,11 +1,11 @@
 <?php
 /**
- * module.config.php - Contact Config
+ * module.config.php - Article Config
  *
- * Main Config File for Contact Module
+ * Main Config File for Article Module
  *
  * @category Config
- * @package Contact
+ * @package Article
  * @author Verein onePlace
  * @copyright (C) 2020  Verein onePlace <admin@1plc.ch>
  * @license https://opensource.org/licenses/BSD-3-Clause
@@ -13,35 +13,35 @@
  * @since 1.0.0
  */
 
-namespace OnePlace\Contact;
+namespace OnePlace\Article;
 
 use Laminas\Router\Http\Literal;
 use Laminas\Router\Http\Segment;
 use Laminas\ServiceManager\Factory\InvokableFactory;
 
 return [
-    # Contact Module - Routes
+    # Article Module - Routes
     'router' => [
         'routes' => [
             # Module Basic Route
-            'contact' => [
+            'article' => [
                 'type'    => Segment::class,
                 'options' => [
-                    'route' => '/contact[/:action[/:id]]',
+                    'route' => '/article[/:action[/:id]]',
                     'constraints' => [
                         'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
                         'id'     => '[0-9]+',
                     ],
                     'defaults' => [
-                        'controller' => Controller\ContactController::class,
+                        'controller' => Controller\ArticleController::class,
                         'action'     => 'index',
                     ],
                 ],
             ],
-            'contact-api' => [
+            'article-api' => [
                 'type'    => Segment::class,
                 'options' => [
-                    'route' => '/contact/api[/:action[/:id]]',
+                    'route' => '/article/api[/:action[/:id]]',
                     'constraints' => [
                         'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
                         'id'     => '[0-9]+',
@@ -52,10 +52,10 @@ return [
                     ],
                 ],
             ],
-            'contact-export' => [
+            'article-export' => [
                 'type'    => Segment::class,
                 'options' => [
-                    'route' => '/contact/export[/:action[/:id]]',
+                    'route' => '/article/export[/:action[/:id]]',
                     'constraints' => [
                         'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
                         'id'     => '[0-9]+',
@@ -66,10 +66,10 @@ return [
                     ],
                 ],
             ],
-            'contact-search' => [
+            'article-search' => [
                 'type'    => Segment::class,
                 'options' => [
-                    'route' => '/contact/search[/:action[/:id]]',
+                    'route' => '/article/search[/:action[/:id]]',
                     'constraints' => [
                         'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
                         'id'     => '[0-9]+',
@@ -80,10 +80,10 @@ return [
                     ],
                 ],
             ],
-            'contact-plugin' => [
+            'article-plugin' => [
                 'type'    => Segment::class,
                 'options' => [
-                    'route' => '/contact/plugin[/:action[/:id]]',
+                    'route' => '/article/plugin[/:action[/:id]]',
                     'constraints' => [
                         'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
                         'id'     => '[0-9]+',
@@ -100,7 +100,7 @@ return [
     # View Settings
     'view_manager' => [
         'template_path_stack' => [
-            'contact' => __DIR__ . '/../view',
+            'article' => __DIR__ . '/../view',
         ],
     ],
 

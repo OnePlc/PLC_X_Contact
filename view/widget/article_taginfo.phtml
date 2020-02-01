@@ -8,18 +8,18 @@ $oTag = CoreController::$aCoreTables['core-tag']->select(['tag_key'=>'category']
 $aFinalTags = [];
 if(count($oTag) > 0) {
     $oTag = $oTag->current();
-    $oEntityTags = CoreController::$aCoreTables['core-entity-tag']->select(['tag_idfs'=>$oTag->Tag_ID,'entity_form_idfs'=>'contact-single']);
+    $oEntityTags = CoreController::$aCoreTables['core-entity-tag']->select(['tag_idfs'=>$oTag->Tag_ID,'entity_form_idfs'=>'article-single']);
 
     try {
-        # Get Contact Table
-        $oContactTbl = CoreController::$oServiceManager->get(\OnePlace\Contact\Model\ContactTable::class);
+        # Get Article Table
+        $oArticleTbl = CoreController::$oServiceManager->get(\OnePlace\Article\Model\ArticleTable::class);
 
-        # Sort Tags by Contact Count per Tag
+        # Sort Tags by Article Count per Tag
         $aTopTagsByCount = [];
         $aSortArray = [];
         if(count($oEntityTags) > 0) {
             foreach($oEntityTags as $oEntityTag) {
-                $iCount = count(CoreController::$aCoreTables['core-entity-tag-entity']->select(['entity_tag_idfs'=>$oEntityTag->Entitytag_ID,'entity_type'=>'contact']));
+                $iCount = count(CoreController::$aCoreTables['core-entity-tag-entity']->select(['entity_tag_idfs'=>$oEntityTag->Entitytag_ID,'entity_type'=>'article']));
                 $aTopTagsByCount[$oEntityTag->Entitytag_ID] = ['iCount'=>$iCount,'oTag'=>$oEntityTag];
                 $aSortArray['iCount'][] = $iCount;
             }
@@ -44,7 +44,7 @@ if(count($oTag) > 0) {
 # Only show widget if we have tags to show
 if(count($aFinalTags) > 0) {
 ?>
-<!-- Contact Category Tag Info -->
+<!-- Article Category Tag Info -->
 <div class="col-md-4 col-xl-4">
     <div class="card">
         <div class="card-header">
@@ -60,7 +60,7 @@ if(count($aFinalTags) > 0) {
                 </div>
             </div>
             <h5 class="card-title mb-0">
-                <?=$this->translate('Contact')?> - <?=$this->translate('Category Info')?>
+                <?=$this->translate('Article')?> - <?=$this->translate('Category Info')?>
             </h5>
         </div>
         <div class="card-body h-100">
@@ -80,7 +80,7 @@ if(count($aFinalTags) > 0) {
         </div>
     </div>
 </div>
-    <!-- Contact Category Tag Info -->
+    <!-- Article Category Tag Info -->
 <?php
 }
 ?>
