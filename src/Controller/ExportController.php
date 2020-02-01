@@ -1,11 +1,11 @@
 <?php
 /**
- * ExportController.php - Article Export Controller
+ * ExportController.php - Contact Export Controller
  *
- * Main Controller for Article Export
+ * Main Controller for Contact Export
  *
  * @category Controller
- * @package Article
+ * @package Contact
  * @author Verein onePlace
  * @copyright (C) 2020  Verein onePlace <admin@1plc.ch>
  * @license https://opensource.org/licenses/BSD-3-Clause
@@ -13,11 +13,11 @@
  * @since 1.0.5
  */
 
-namespace OnePlace\Article\Controller;
+namespace OnePlace\Contact\Controller;
 
 use Application\Controller\CoreController;
 use Application\Controller\CoreExportController;
-use OnePlace\Article\Model\ArticleTable;
+use OnePlace\Contact\Model\ContactTable;
 use Laminas\Db\Sql\Where;
 use Laminas\Db\Adapter\AdapterInterface;
 use Laminas\View\Model\ViewModel;
@@ -29,16 +29,16 @@ class ExportController extends CoreExportController
      * ApiController constructor.
      *
      * @param AdapterInterface $oDbAdapter
-     * @param ArticleTable $oTableGateway
+     * @param ContactTable $oTableGateway
      * @since 1.0.0
      */
-    public function __construct(AdapterInterface $oDbAdapter,ArticleTable $oTableGateway,$oServiceManager) {
+    public function __construct(AdapterInterface $oDbAdapter,ContactTable $oTableGateway,$oServiceManager) {
         parent::__construct($oDbAdapter,$oTableGateway,$oServiceManager);
     }
 
 
     /**
-     * Dump Articles to excel file
+     * Dump Contacts to excel file
      *
      * @return ViewModel
      * @since 1.0.5
@@ -47,7 +47,7 @@ class ExportController extends CoreExportController
         $this->layout('layout/json');
 
         # Use Default export function
-        $aViewData = $this->exportArticleBasedData('Articles','article');
+        $aViewData = $this->exportContactBasedData('Contacts','contact');
 
         # return data to view (popup)
         return new ViewModel($aViewData);

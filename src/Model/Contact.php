@@ -1,11 +1,11 @@
 <?php
 /**
- * Article.php - Article Entity
+ * Contact.php - Contact Entity
  *
- * Entity Model for Article
+ * Entity Model for Contact
  *
  * @category Model
- * @package Article
+ * @package Contact
  * @author Verein onePlace
  * @copyright (C) 2020 Verein onePlace <admin@1plc.ch>
  * @license https://opensource.org/licenses/BSD-3-Clause
@@ -13,15 +13,15 @@
  * @since 1.0.0
  */
 
-namespace OnePlace\Article\Model;
+namespace OnePlace\Contact\Model;
 
 use Application\Model\CoreEntityModel;
 
-class Article extends CoreEntityModel {
+class Contact extends CoreEntityModel {
     public $label;
 
     /**
-     * Article constructor.
+     * Contact constructor.
      *
      * @param AdapterInterface $oDbAdapter
      * @since 1.0.0
@@ -30,7 +30,7 @@ class Article extends CoreEntityModel {
         parent::__construct($oDbAdapter);
 
         # Set Single Form Name
-        $this->sSingleForm = 'article-single';
+        $this->sSingleForm = 'contact-single';
 
         # Attach Dynamic Fields to Entity Model
         $this->attachDynamicFields();
@@ -43,7 +43,7 @@ class Article extends CoreEntityModel {
      * @since 1.0.0
      */
     public function exchangeArray(array $aData) {
-        $this->id = !empty($aData['Article_ID']) ? $aData['Article_ID'] : 0;
+        $this->id = !empty($aData['Contact_ID']) ? $aData['Contact_ID'] : 0;
         $this->label = !empty($aData['label']) ? $aData['label'] : '';
 
         $this->updateDynamicFields($aData);

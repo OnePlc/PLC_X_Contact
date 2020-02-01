@@ -1,11 +1,11 @@
 <?php
 /**
- * ArticleController.php - Main Controller
+ * ContactController.php - Main Controller
  *
- * Main Controller Article Module
+ * Main Controller Contact Module
  *
  * @category Controller
- * @package Article
+ * @package Contact
  * @author Verein onePlace
  * @copyright (C) 2020  Verein onePlace <admin@1plc.ch>
  * @license https://opensource.org/licenses/BSD-3-Clause
@@ -15,33 +15,33 @@
 
 declare(strict_types=1);
 
-namespace OnePlace\Article\Controller;
+namespace OnePlace\Contact\Controller;
 
 use Application\Controller\CoreEntityController;
 use Application\Model\CoreEntityModel;
-use OnePlace\Article\Model\Article;
-use OnePlace\Article\Model\ArticleTable;
+use OnePlace\Contact\Model\Contact;
+use OnePlace\Contact\Model\ContactTable;
 use Laminas\View\Model\ViewModel;
 use Laminas\Db\Adapter\AdapterInterface;
 
-class ArticleController extends CoreEntityController {
+class ContactController extends CoreEntityController {
     /**
-     * Article Table Object
+     * Contact Table Object
      *
      * @since 1.0.0
      */
     protected $oTableGateway;
 
     /**
-     * ArticleController constructor.
+     * ContactController constructor.
      *
      * @param AdapterInterface $oDbAdapter
-     * @param ArticleTable $oTableGateway
+     * @param ContactTable $oTableGateway
      * @since 1.0.0
      */
-    public function __construct(AdapterInterface $oDbAdapter,ArticleTable $oTableGateway,$oServiceManager) {
+    public function __construct(AdapterInterface $oDbAdapter,ContactTable $oTableGateway,$oServiceManager) {
         $this->oTableGateway = $oTableGateway;
-        $this->sSingleForm = 'article-single';
+        $this->sSingleForm = 'contact-single';
         parent::__construct($oDbAdapter,$oTableGateway,$oServiceManager);
 
         if($oTableGateway) {
@@ -53,7 +53,7 @@ class ArticleController extends CoreEntityController {
     }
 
     /**
-     * Article Index
+     * Contact Index
      *
      * @since 1.0.0
      * @return ViewModel - View Object with Data from Controller
@@ -62,11 +62,11 @@ class ArticleController extends CoreEntityController {
 
         # You can just use the default function and customize it via hooks
         # or replace the entire function if you need more customization
-        return $this->generateIndexView('article');
+        return $this->generateIndexView('contact');
     }
 
     /**
-     * Article Add Form
+     * Contact Add Form
      *
      * @since 1.0.0
      * @return ViewModel - View Object with Data from Controller
@@ -78,15 +78,15 @@ class ArticleController extends CoreEntityController {
          *
          * Hooks available:
          *
-         * article-add-before (before show add form)
-         * article-add-before-save (before save)
-         * article-add-after-save (after save)
+         * contact-add-before (before show add form)
+         * contact-add-before-save (before save)
+         * contact-add-after-save (after save)
          */
-        return $this->generateAddView('article');
+        return $this->generateAddView('contact');
     }
 
     /**
-     * Article Edit Form
+     * Contact Edit Form
      *
      * @since 1.0.0
      * @return ViewModel - View Object with Data from Controller
@@ -98,15 +98,15 @@ class ArticleController extends CoreEntityController {
          *
          * Hooks available:
          *
-         * article-edit-before (before show edit form)
-         * article-edit-before-save (before save)
-         * article-edit-after-save (after save)
+         * contact-edit-before (before show edit form)
+         * contact-edit-before-save (before save)
+         * contact-edit-after-save (after save)
          */
-        return $this->generateEditView('article');
+        return $this->generateEditView('contact');
     }
 
     /**
-     * Article View Form
+     * Contact View Form
      *
      * @since 1.0.0
      * @return ViewModel - View Object with Data from Controller
@@ -118,8 +118,8 @@ class ArticleController extends CoreEntityController {
          *
          * Hooks available:
          *
-         * article-view-before
+         * contact-view-before
          */
-        return $this->generateViewView('article');
+        return $this->generateViewView('contact');
     }
 }

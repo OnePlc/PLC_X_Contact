@@ -2,10 +2,10 @@
 /**
  * Module.php - Module Class
  *
- * Module Class File for Article Module
+ * Module Class File for Contact Module
  *
  * @category Config
- * @package Article
+ * @package Contact
  * @author Verein onePlace
  * @copyright (C) 2020  Verein onePlace <admin@1plc.ch>
  * @license https://opensource.org/licenses/BSD-3-Clause
@@ -13,7 +13,7 @@
  * @since 1.0.0
  */
 
-namespace OnePlace\Article;
+namespace OnePlace\Contact;
 
 use Laminas\Db\Adapter\AdapterInterface;
 use Laminas\Db\ResultSet\ResultSet;
@@ -24,7 +24,7 @@ use Laminas\Session\Config\StandardConfig;
 use Laminas\Session\SessionManager;
 use Laminas\Session\Container;
 use Application\Controller\CoreEntityController;
-use OnePlace\Article\Controller\PluginController;
+use OnePlace\Contact\Controller\PluginController;
 
 class Module {
     /**
@@ -50,16 +50,16 @@ class Module {
     public function getServiceConfig() : array {
         return [
             'factories' => [
-                # Article Module - Base Model
-                Model\ArticleTable::class => function($container) {
-                    $tableGateway = $container->get(Model\ArticleTableGateway::class);
-                    return new Model\ArticleTable($tableGateway,$container);
+                # Contact Module - Base Model
+                Model\ContactTable::class => function($container) {
+                    $tableGateway = $container->get(Model\ContactTableGateway::class);
+                    return new Model\ContactTable($tableGateway,$container);
                 },
-                Model\ArticleTableGateway::class => function ($container) {
+                Model\ContactTableGateway::class => function ($container) {
                     $dbAdapter = $container->get(AdapterInterface::class);
                     $resultSetPrototype = new ResultSet();
-                    $resultSetPrototype->setArrayObjectPrototype(new Model\Article($dbAdapter));
-                    return new TableGateway('article', $dbAdapter, null, $resultSetPrototype);
+                    $resultSetPrototype->setArrayObjectPrototype(new Model\Contact($dbAdapter));
+                    return new TableGateway('contact', $dbAdapter, null, $resultSetPrototype);
                 },
             ],
         ];
@@ -76,19 +76,19 @@ class Module {
                     $oDbAdapter = $container->get(AdapterInterface::class);
                     return new Controller\PluginController(
                         $oDbAdapter,
-                        $container->get(Model\ArticleTable::class),
+                        $container->get(Model\ContactTable::class),
                         $container
                     );
                 },
-                # Article Main Controller
-                Controller\ArticleController::class => function($container) {
+                # Contact Main Controller
+                Controller\ContactController::class => function($container) {
                     $oDbAdapter = $container->get(AdapterInterface::class);
-                    $tableGateway = $container->get(Model\ArticleTable::class);
+                    $tableGateway = $container->get(Model\ContactTable::class);
                     # hook plugin
-                    CoreEntityController::addHook('article-add-before',(object)['sFunction'=>'testFunction','oItem'=>new PluginController($oDbAdapter,$tableGateway,$container)]);
-                    return new Controller\ArticleController(
+                    CoreEntityController::addHook('contact-add-before',(object)['sFunction'=>'testFunction','oItem'=>new PluginController($oDbAdapter,$tableGateway,$container)]);
+                    return new Controller\ContactController(
                         $oDbAdapter,
-                        $container->get(Model\ArticleTable::class),
+                        $container->get(Model\ContactTable::class),
                         $container
                     );
                 },
@@ -97,7 +97,7 @@ class Module {
                     $oDbAdapter = $container->get(AdapterInterface::class);
                     return new Controller\ApiController(
                         $oDbAdapter,
-                        $container->get(Model\ArticleTable::class),
+                        $container->get(Model\ContactTable::class),
                         $container
                     );
                 },
@@ -106,7 +106,7 @@ class Module {
                     $oDbAdapter = $container->get(AdapterInterface::class);
                     return new Controller\ExportController(
                         $oDbAdapter,
-                        $container->get(Model\ArticleTable::class),
+                        $container->get(Model\ContactTable::class),
                         $container
                     );
                 },
@@ -115,7 +115,7 @@ class Module {
                     $oDbAdapter = $container->get(AdapterInterface::class);
                     return new Controller\SearchController(
                         $oDbAdapter,
-                        $container->get(Model\ArticleTable::class),
+                        $container->get(Model\ContactTable::class),
                         $container
                     );
                 },

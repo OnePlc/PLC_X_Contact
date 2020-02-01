@@ -1,11 +1,11 @@
 <?php
 /**
- * ArticleController.php - Main Controller
+ * ContactController.php - Main Controller
  *
- * Main Controller Article Module
+ * Main Controller Contact Module
  *
  * @category Controller
- * @package Article
+ * @package Contact
  * @author Verein onePlace
  * @copyright (C) 2020  Verein onePlace <admin@1plc.ch>
  * @license https://opensource.org/licenses/BSD-3-Clause
@@ -15,33 +15,33 @@
 
 declare(strict_types=1);
 
-namespace OnePlace\Article\Controller;
+namespace OnePlace\Contact\Controller;
 
 use Application\Controller\CoreEntityController;
 use Application\Model\CoreEntityModel;
-use OnePlace\Article\Model\Article;
-use OnePlace\Article\Model\ArticleTable;
+use OnePlace\Contact\Model\Contact;
+use OnePlace\Contact\Model\ContactTable;
 use Laminas\View\Model\ViewModel;
 use Laminas\Db\Adapter\AdapterInterface;
 
 class PluginController extends CoreEntityController {
     /**
-     * Article Table Object
+     * Contact Table Object
      *
      * @since 1.0.0
      */
     protected $oTableGateway;
 
     /**
-     * ArticleController constructor.
+     * ContactController constructor.
      *
      * @param AdapterInterface $oDbAdapter
-     * @param ArticleTable $oTableGateway
+     * @param ContactTable $oTableGateway
      * @since 1.0.0
      */
-    public function __construct(AdapterInterface $oDbAdapter,ArticleTable $oTableGateway,$oServiceManager) {
+    public function __construct(AdapterInterface $oDbAdapter,ContactTable $oTableGateway,$oServiceManager) {
         $this->oTableGateway = $oTableGateway;
-        $this->sSingleForm = 'article-single';
+        $this->sSingleForm = 'contact-single';
         parent::__construct($oDbAdapter,$oTableGateway,$oServiceManager);
 
         if($oTableGateway) {

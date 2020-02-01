@@ -1,8 +1,8 @@
 <?php
 /**
- * ApiController.php - Article Api Controller
+ * ApiController.php - Contact Api Controller
  *
- * Main Controller for Article Api
+ * Main Controller for Contact Api
  *
  * @category Controller
  * @package Application
@@ -15,17 +15,17 @@
 
 declare(strict_types=1);
 
-namespace OnePlace\Article\Controller;
+namespace OnePlace\Contact\Controller;
 
 use Application\Controller\CoreController;
-use OnePlace\Article\Model\ArticleTable;
+use OnePlace\Contact\Model\ContactTable;
 use Laminas\View\Model\ViewModel;
 use Laminas\Db\Adapter\AdapterInterface;
 use Zend\I18n\Translator\Translator;
 
 class ApiController extends CoreController {
     /**
-     * Article Table Object
+     * Contact Table Object
      *
      * @since 1.0.0
      */
@@ -35,13 +35,13 @@ class ApiController extends CoreController {
      * ApiController constructor.
      *
      * @param AdapterInterface $oDbAdapter
-     * @param ArticleTable $oTableGateway
+     * @param ContactTable $oTableGateway
      * @since 1.0.0
      */
-    public function __construct(AdapterInterface $oDbAdapter,ArticleTable $oTableGateway,$oServiceManager) {
+    public function __construct(AdapterInterface $oDbAdapter,ContactTable $oTableGateway,$oServiceManager) {
         parent::__construct($oDbAdapter,$oTableGateway,$oServiceManager);
         $this->oTableGateway = $oTableGateway;
-        $this->sSingleForm = 'article-single';
+        $this->sSingleForm = 'contact-single';
     }
 
     /**
@@ -53,14 +53,14 @@ class ApiController extends CoreController {
     public function indexAction() {
         $this->layout('layout/json');
 
-        $aReturn = ['state'=>'success','message'=>'Welcome to onePlace Article API'];
+        $aReturn = ['state'=>'success','message'=>'Welcome to onePlace Contact API'];
         echo json_encode($aReturn);
 
         return false;
     }
 
     /**
-     * List all Entities of Articles
+     * List all Entities of Contacts
      *
      * @return bool - no View File
      * @since 1.0.0
@@ -69,8 +69,8 @@ class ApiController extends CoreController {
         $this->layout('layout/json');
 
         # Check license
-        if(!$this->checkLicense('article')) {
-            $aReturn = ['state'=>'error','message'=>'no valid license for article found'];
+        if(!$this->checkLicense('contact')) {
+            $aReturn = ['state'=>'error','message'=>'no valid license for contact found'];
             echo json_encode($aReturn);
             return false;
         }
@@ -102,7 +102,7 @@ class ApiController extends CoreController {
         $aLangs = ['en_US','de_DE'];
         foreach($aLangs as $sLoadLang) {
             if(file_exists(__DIR__.'/../../../oneplace-translation/language/'.$sLoadLang.'.mo')) {
-                $translator->addTranslationFile('gettext', __DIR__.'/../../../oneplace-translation/language/'.$sLang.'.mo', 'article', $sLoadLang);
+                $translator->addTranslationFile('gettext', __DIR__.'/../../../oneplace-translation/language/'.$sLang.'.mo', 'contact', $sLoadLang);
             }
         }
 
@@ -122,7 +122,7 @@ class ApiController extends CoreController {
         # Init Item List for Response
         $aItems = [];
 
-        $aFields = $this->getFormFields('article-single');
+        $aFields = $this->getFormFields('contact-single');
         $aFieldsByKey = [];
         # fields are sorted by tab , we need an index with all fields
         foreach($aFields as $oField) {
@@ -142,7 +142,7 @@ class ApiController extends CoreController {
             return false;
         }
 
-        # Get All Article Entities from Database
+        # Get All Contact Entities from Database
         $oItemsDB = $this->oTableGateway->fetchAll(false);
         if(count($oItemsDB) > 0) {
             # Loop all items
@@ -180,7 +180,7 @@ class ApiController extends CoreController {
                                 $oTags = $oItem->getMultiSelectField($oField->fieldkey);
                                 $aTags = [];
                                 foreach($oTags as $oTag) {
-                                    $aTags[] = ['id'=>$oTag->id,'label'=>$translator->translate($oTag->text,'article',$sLang)];
+                                    $aTags[] = ['id'=>$oTag->id,'label'=>$translator->translate($oTag->text,'contact',$sLang)];
                                 }
                                 $aPublicItem[$oField->fieldkey] = $aTags;
                                 break;
@@ -189,16 +189,16 @@ class ApiController extends CoreController {
                                 $oTag = $oItem->getSelectField($oField->fieldkey);
                                 if($oTag) {
                                     if (property_exists($oTag, 'tag_value')) {
-                                        $aPublicItem[$oField->fieldkey] = ['id' => $oTag->id, 'label' => $translator->translate($oTag->tag_value,'article',$sLang)];
+                                        $aPublicItem[$oField->fieldkey] = ['id' => $oTag->id, 'label' => $translator->translate($oTag->tag_value,'contact',$sLang)];
                                     } else {
-                                        $aPublicItem[$oField->fieldkey] = ['id' => $oTag->getID(), 'label' => $translator->translate($oTag->getLabel(),'article',$sLang)];
+                                        $aPublicItem[$oField->fieldkey] = ['id' => $oTag->getID(), 'label' => $translator->translate($oTag->getLabel(),'contact',$sLang)];
                                     }
                                 }
                                 break;
                             case 'text':
                             case 'date':
                             case 'textarea':
-                                $aPublicItem[$oField->fieldkey] = $translator->translate($oItem->getTextField($oField->fieldkey),'article',$sLang);
+                                $aPublicItem[$oField->fieldkey] = $translator->translate($oItem->getTextField($oField->fieldkey),'contact',$sLang);
                                 break;
                             default:
                                 break;
@@ -228,7 +228,7 @@ class ApiController extends CoreController {
     }
 
     /**
-     * Get a single Entity of Article
+     * Get a single Entity of Contact
      *
      * @return bool - no View File
      * @since 1.0.0
@@ -237,27 +237,27 @@ class ApiController extends CoreController {
         $this->layout('layout/json');
 
         # Check license
-        if(!$this->checkLicense('article')) {
-            $aReturn = ['state'=>'error','message'=>'no valid license for article found'];
+        if(!$this->checkLicense('contact')) {
+            $aReturn = ['state'=>'error','message'=>'no valid license for contact found'];
             echo json_encode($aReturn);
             return false;
         }
 
-        # Get Article ID from route
+        # Get Contact ID from route
         $iItemID = $this->params()->fromRoute('id', 0);
 
-        # Try to get Article
+        # Try to get Contact
         try {
             $oItem = $this->oTableGateway->getSingle($iItemID);
         } catch (\RuntimeException $e) {
             # Display error message
-            $aReturn = ['state'=>'error','message'=>'Article not found','oItem'=>[]];
+            $aReturn = ['state'=>'error','message'=>'Contact not found','oItem'=>[]];
             echo json_encode($aReturn);
             return false;
         }
 
         # Print Entity
-        $aReturn = ['state'=>'success','message'=>'Article found','oItem'=>$oItem];
+        $aReturn = ['state'=>'success','message'=>'Contact found','oItem'=>$oItem];
         echo json_encode($aReturn);
 
         return false;
