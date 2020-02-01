@@ -2,10 +2,10 @@
 /**
  * ApiControllerTest.php - Main Controller Test Class
  *
- * Test Class for Main Controller of Article Module
+ * Test Class for Main Controller of Skeleton Module
  *
  * @category Test
- * @package Article
+ * @package Skeleton
  * @author Verein onePlace
  * @copyright (C) 2020  Verein onePlace <admin@1plc.ch>
  * @license https://opensource.org/licenses/BSD-3-Clause
@@ -15,9 +15,9 @@
 
 declare(strict_types=1);
 
-namespace OnePlaceTest\Article\Controller;
+namespace OnePlaceTest\Skeleton\Controller;
 
-use OnePlace\Article\Controller\ApiController;
+use OnePlace\Skeleton\Controller\ApiController;
 use Laminas\Stdlib\ArrayUtils;
 use Laminas\Test\PHPUnit\Controller\AbstractHttpControllerTestCase;
 use Laminas\Session\Container;
@@ -35,7 +35,7 @@ class ApiControllerTest extends AbstractHttpControllerTestCase {
 
         $this->setApplicationConfig([
             // Retrieve list of modules used in this application.
-            'modules' => ['OnePlace\Article'],
+            'modules' => ['OnePlace\Skeleton'],
 
             // These are various options for the listeners attached to the ModuleManager
             'module_listener_options' => [
@@ -80,7 +80,7 @@ class ApiControllerTest extends AbstractHttpControllerTestCase {
     }
 
     public function testIndexActionCannotBeAccessedWithoutKey() {
-        $this->dispatch('/article/api', 'GET');
+        $this->dispatch('/skeleton/api', 'GET');
         $this->assertResponseStatusCode(302);
         $this->assertRedirectTo('/login');
     }
@@ -89,11 +89,11 @@ class ApiControllerTest extends AbstractHttpControllerTestCase {
         # todo: API works without session - somehow $_REQUEST is empty with testsuite find out why
         $this->initFakeTestSession();
 
-        $this->dispatch('/article/api?authkey=DEVRANDOMKEY', 'GET');
+        $this->dispatch('/skeleton/api?authkey=DEVRANDOMKEY', 'GET');
         $this->assertResponseStatusCode(200);
-        $this->assertModuleName('article');
+        $this->assertModuleName('skeleton');
         $this->assertControllerName(ApiController::class); // as specified in router's controller name alias
         $this->assertControllerClass('ApiController');
-        $this->assertMatchedRouteName('article-api');
+        $this->assertMatchedRouteName('skeleton-api');
     }
 }

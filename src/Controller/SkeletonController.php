@@ -1,11 +1,11 @@
 <?php
 /**
- * ArticleController.php - Main Controller
+ * SkeletonController.php - Main Controller
  *
- * Main Controller Article Module
+ * Main Controller Skeleton Module
  *
  * @category Controller
- * @package Article
+ * @package Skeleton
  * @author Verein onePlace
  * @copyright (C) 2020  Verein onePlace <admin@1plc.ch>
  * @license https://opensource.org/licenses/BSD-3-Clause
@@ -15,33 +15,33 @@
 
 declare(strict_types=1);
 
-namespace OnePlace\Article\Controller;
+namespace OnePlace\Skeleton\Controller;
 
 use Application\Controller\CoreEntityController;
 use Application\Model\CoreEntityModel;
-use OnePlace\Article\Model\Article;
-use OnePlace\Article\Model\ArticleTable;
+use OnePlace\Skeleton\Model\Skeleton;
+use OnePlace\Skeleton\Model\SkeletonTable;
 use Laminas\View\Model\ViewModel;
 use Laminas\Db\Adapter\AdapterInterface;
 
-class ArticleController extends CoreEntityController {
+class SkeletonController extends CoreEntityController {
     /**
-     * Article Table Object
+     * Skeleton Table Object
      *
      * @since 1.0.0
      */
     protected $oTableGateway;
 
     /**
-     * ArticleController constructor.
+     * SkeletonController constructor.
      *
      * @param AdapterInterface $oDbAdapter
-     * @param ArticleTable $oTableGateway
+     * @param SkeletonTable $oTableGateway
      * @since 1.0.0
      */
-    public function __construct(AdapterInterface $oDbAdapter,ArticleTable $oTableGateway,$oServiceManager) {
+    public function __construct(AdapterInterface $oDbAdapter,SkeletonTable $oTableGateway,$oServiceManager) {
         $this->oTableGateway = $oTableGateway;
-        $this->sSingleForm = 'article-single';
+        $this->sSingleForm = 'skeleton-single';
         parent::__construct($oDbAdapter,$oTableGateway,$oServiceManager);
 
         if($oTableGateway) {
@@ -53,7 +53,7 @@ class ArticleController extends CoreEntityController {
     }
 
     /**
-     * Article Index
+     * Skeleton Index
      *
      * @since 1.0.0
      * @return ViewModel - View Object with Data from Controller
@@ -62,11 +62,11 @@ class ArticleController extends CoreEntityController {
 
         # You can just use the default function and customize it via hooks
         # or replace the entire function if you need more customization
-        return $this->generateIndexView('article');
+        return $this->generateIndexView('skeleton');
     }
 
     /**
-     * Article Add Form
+     * Skeleton Add Form
      *
      * @since 1.0.0
      * @return ViewModel - View Object with Data from Controller
@@ -78,15 +78,15 @@ class ArticleController extends CoreEntityController {
          *
          * Hooks available:
          *
-         * article-add-before (before show add form)
-         * article-add-before-save (before save)
-         * article-add-after-save (after save)
+         * skeleton-add-before (before show add form)
+         * skeleton-add-before-save (before save)
+         * skeleton-add-after-save (after save)
          */
-        return $this->generateAddView('article');
+        return $this->generateAddView('skeleton');
     }
 
     /**
-     * Article Edit Form
+     * Skeleton Edit Form
      *
      * @since 1.0.0
      * @return ViewModel - View Object with Data from Controller
@@ -98,15 +98,15 @@ class ArticleController extends CoreEntityController {
          *
          * Hooks available:
          *
-         * article-edit-before (before show edit form)
-         * article-edit-before-save (before save)
-         * article-edit-after-save (after save)
+         * skeleton-edit-before (before show edit form)
+         * skeleton-edit-before-save (before save)
+         * skeleton-edit-after-save (after save)
          */
-        return $this->generateEditView('article');
+        return $this->generateEditView('skeleton');
     }
 
     /**
-     * Article View Form
+     * Skeleton View Form
      *
      * @since 1.0.0
      * @return ViewModel - View Object with Data from Controller
@@ -118,8 +118,8 @@ class ArticleController extends CoreEntityController {
          *
          * Hooks available:
          *
-         * article-view-before
+         * skeleton-view-before
          */
-        return $this->generateViewView('article');
+        return $this->generateViewView('skeleton');
     }
 }

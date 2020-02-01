@@ -1,11 +1,11 @@
 <?php
 /**
- * module.config.php - Article Config
+ * module.config.php - Skeleton Config
  *
- * Main Config File for Article Module
+ * Main Config File for Skeleton Module
  *
  * @category Config
- * @package Article
+ * @package Skeleton
  * @author Verein onePlace
  * @copyright (C) 2020  Verein onePlace <admin@1plc.ch>
  * @license https://opensource.org/licenses/BSD-3-Clause
@@ -13,35 +13,35 @@
  * @since 1.0.0
  */
 
-namespace OnePlace\Article;
+namespace OnePlace\Skeleton;
 
 use Laminas\Router\Http\Literal;
 use Laminas\Router\Http\Segment;
 use Laminas\ServiceManager\Factory\InvokableFactory;
 
 return [
-    # Article Module - Routes
+    # Skeleton Module - Routes
     'router' => [
         'routes' => [
             # Module Basic Route
-            'article' => [
+            'skeleton' => [
                 'type'    => Segment::class,
                 'options' => [
-                    'route' => '/article[/:action[/:id]]',
+                    'route' => '/skeleton[/:action[/:id]]',
                     'constraints' => [
                         'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
                         'id'     => '[0-9]+',
                     ],
                     'defaults' => [
-                        'controller' => Controller\ArticleController::class,
+                        'controller' => Controller\SkeletonController::class,
                         'action'     => 'index',
                     ],
                 ],
             ],
-            'article-api' => [
+            'skeleton-api' => [
                 'type'    => Segment::class,
                 'options' => [
-                    'route' => '/article/api[/:action[/:id]]',
+                    'route' => '/skeleton/api[/:action[/:id]]',
                     'constraints' => [
                         'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
                         'id'     => '[0-9]+',
@@ -52,10 +52,10 @@ return [
                     ],
                 ],
             ],
-            'article-export' => [
+            'skeleton-export' => [
                 'type'    => Segment::class,
                 'options' => [
-                    'route' => '/article/export[/:action[/:id]]',
+                    'route' => '/skeleton/export[/:action[/:id]]',
                     'constraints' => [
                         'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
                         'id'     => '[0-9]+',
@@ -66,10 +66,10 @@ return [
                     ],
                 ],
             ],
-            'article-search' => [
+            'skeleton-search' => [
                 'type'    => Segment::class,
                 'options' => [
-                    'route' => '/article/search[/:action[/:id]]',
+                    'route' => '/skeleton/search[/:action[/:id]]',
                     'constraints' => [
                         'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
                         'id'     => '[0-9]+',
@@ -80,10 +80,10 @@ return [
                     ],
                 ],
             ],
-            'article-plugin' => [
+            'skeleton-plugin' => [
                 'type'    => Segment::class,
                 'options' => [
-                    'route' => '/article/plugin[/:action[/:id]]',
+                    'route' => '/skeleton/plugin[/:action[/:id]]',
                     'constraints' => [
                         'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
                         'id'     => '[0-9]+',
@@ -100,7 +100,7 @@ return [
     # View Settings
     'view_manager' => [
         'template_path_stack' => [
-            'article' => __DIR__ . '/../view',
+            'skeleton' => __DIR__ . '/../view',
         ],
     ],
 

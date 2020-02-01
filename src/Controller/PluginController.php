@@ -1,11 +1,11 @@
 <?php
 /**
- * ArticleController.php - Main Controller
+ * SkeletonController.php - Main Controller
  *
- * Main Controller Article Module
+ * Main Controller Skeleton Module
  *
  * @category Controller
- * @package Article
+ * @package Skeleton
  * @author Verein onePlace
  * @copyright (C) 2020  Verein onePlace <admin@1plc.ch>
  * @license https://opensource.org/licenses/BSD-3-Clause
@@ -15,33 +15,33 @@
 
 declare(strict_types=1);
 
-namespace OnePlace\Article\Controller;
+namespace OnePlace\Skeleton\Controller;
 
 use Application\Controller\CoreEntityController;
 use Application\Model\CoreEntityModel;
-use OnePlace\Article\Model\Article;
-use OnePlace\Article\Model\ArticleTable;
+use OnePlace\Skeleton\Model\Skeleton;
+use OnePlace\Skeleton\Model\SkeletonTable;
 use Laminas\View\Model\ViewModel;
 use Laminas\Db\Adapter\AdapterInterface;
 
 class PluginController extends CoreEntityController {
     /**
-     * Article Table Object
+     * Skeleton Table Object
      *
      * @since 1.0.0
      */
     protected $oTableGateway;
 
     /**
-     * ArticleController constructor.
+     * SkeletonController constructor.
      *
      * @param AdapterInterface $oDbAdapter
-     * @param ArticleTable $oTableGateway
+     * @param SkeletonTable $oTableGateway
      * @since 1.0.0
      */
-    public function __construct(AdapterInterface $oDbAdapter,ArticleTable $oTableGateway,$oServiceManager) {
+    public function __construct(AdapterInterface $oDbAdapter,SkeletonTable $oTableGateway,$oServiceManager) {
         $this->oTableGateway = $oTableGateway;
-        $this->sSingleForm = 'article-single';
+        $this->sSingleForm = 'skeleton-single';
         parent::__construct($oDbAdapter,$oTableGateway,$oServiceManager);
 
         if($oTableGateway) {
