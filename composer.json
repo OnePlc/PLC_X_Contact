@@ -18,7 +18,7 @@
     },
     "require": {
         "php": "^7.1",
-        "oneplace/oneplace-core": "^1.0.7",
+        "oneplace/oneplace-core": "^1.0.0",
         "phpoffice/phpspreadsheet": "^1.10"
     },
     "autoload": {
