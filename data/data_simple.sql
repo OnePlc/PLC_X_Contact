@@ -1,7 +1,7 @@
 --
 -- Core Form - Contact Base Fields
 --
-INSERT INTO `core_form_field` (`Field_ID`, `type`, `label`, `fieldkey`, `tab`, `form`, `class`, `url_view`, `url_ist`, `show_widget_left`, `allow_clear`, `readonly`, `tbl_cached_name`, `tbl_class`, `tbl_permission`) VALUES
+INSERT INTO `core_form_field` (`Field_ID`, `type`, `label`, `fieldkey`, `tab`, `form`, `class`, `url_view`, `url_list`, `show_widget_left`, `allow_clear`, `readonly`, `tbl_cached_name`, `tbl_class`, `tbl_permission`) VALUES
 (NULL, 'textarea', 'Description', 'description', 'contact-base', 'contact-single', 'col-md-12', '', '', 0, 1, 0, '', '', ''),
 (NULL, 'text', 'Firstname', 'firstname', 'contact-base', 'contact-single', 'col-md-3', '', '/contact/view/##ID##', 0, 1, 0, '', '', ''),
 (NULL, 'text', 'Lastname', 'lastname', 'contact-base', 'contact-single', 'col-md-3', '', '/contact/view/##ID##', 0, 1, 0, '', '', ''),
@@ -15,30 +15,30 @@ INSERT INTO `core_form_field` (`Field_ID`, `type`, `label`, `fieldkey`, `tab`, `
 --
 -- Core Form - Contact History Fields
 --
-INSERT INTO `core_form_field` (`Field_ID`, `type`, `label`, `fieldkey`, `tab`, `form`, `class`, `url_view`, `url_ist`, `show_widget_left`, `allow_clear`, `readonly`, `tbl_cached_name`, `tbl_class`, `tbl_permission`) VALUES
+INSERT INTO `core_form_field` (`Field_ID`, `type`, `label`, `fieldkey`, `tab`, `form`, `class`, `url_view`, `url_list`, `show_widget_left`, `allow_clear`, `readonly`, `tbl_cached_name`, `tbl_class`, `tbl_permission`) VALUES
 (NULL, 'partial', 'History', 'contact_history', 'contact-history', 'contact-single', 'col-md-12', '', '', 0, 1, 0, '', '', '');
 
 --
 -- Core Form - Contact Basket Fields
 --
-INSERT INTO `core_form_field` (`Field_ID`, `type`, `label`, `fieldkey`, `tab`, `form`, `class`, `url_view`, `url_ist`, `show_widget_left`, `allow_clear`, `readonly`, `tbl_cached_name`, `tbl_class`, `tbl_permission`) VALUES
+INSERT INTO `core_form_field` (`Field_ID`, `type`, `label`, `fieldkey`, `tab`, `form`, `class`, `url_view`, `url_list`, `show_widget_left`, `allow_clear`, `readonly`, `tbl_cached_name`, `tbl_class`, `tbl_permission`) VALUES
 (NULL, 'partial', 'Basket', 'contact_basket', 'contact-basket', 'contact-single', 'col-md-12', '', '', 0, 1, 0, '', '', '');
 
 --
 -- Core Form - Contact Job Fields
 --
-INSERT INTO `core_form_field` (`Field_ID`, `type`, `label`, `fieldkey`, `tab`, `form`, `class`, `url_view`, `url_ist`, `show_widget_left`, `allow_clear`, `readonly`, `tbl_cached_name`, `tbl_class`, `tbl_permission`) VALUES
+INSERT INTO `core_form_field` (`Field_ID`, `type`, `label`, `fieldkey`, `tab`, `form`, `class`, `url_view`, `url_list`, `show_widget_left`, `allow_clear`, `readonly`, `tbl_cached_name`, `tbl_class`, `tbl_permission`) VALUES
 (NULL, 'partial', 'Job', 'contact_job', 'contact-job', 'contact-single', 'col-md-12', '', '', 0, 1, 0, '', '', '');
 
 --
--- Core Form - Contact Shoprequest Fields
+-- Core Form - Contact Request Fields
 --
-INSERT INTO `core_form_field` (`Field_ID`, `type`, `label`, `fieldkey`, `tab`, `form`, `class`, `url_view`, `url_ist`, `show_widget_left`, `allow_clear`, `readonly`, `tbl_cached_name`, `tbl_class`, `tbl_permission`) VALUES
+INSERT INTO `core_form_field` (`Field_ID`, `type`, `label`, `fieldkey`, `tab`, `form`, `class`, `url_view`, `url_list`, `show_widget_left`, `allow_clear`, `readonly`, `tbl_cached_name`, `tbl_class`, `tbl_permission`) VALUES
 (NULL, 'partial', 'Request', 'contact_request', 'contact-request', 'contact-single', 'col-md-12', '', '', 0, 1, 0, '', '', '');
 
 
 --
--- book Form Tabs
+-- Core Form  Tabs
 --
 INSERT INTO `core_form_tab` (`Tab_ID`, `form`, `title`, `subtitle`, `icon`, `counter`, `sort_id`, `filter_check`, `filter_value`) VALUES
 ('contact-history', 'contact-single', 'History', '', 'fas fa-history', '', 1, '', ''),
@@ -46,6 +46,9 @@ INSERT INTO `core_form_tab` (`Tab_ID`, `form`, `title`, `subtitle`, `icon`, `cou
 ('contact-job', 'contact-single', 'Job', '', 'fas fa-book', '', 1, '', ''),
 ('contact-request', 'contact-single', 'Request', 'request', 'fas fa-envelop', '', 1, '', '');
 
+--
+-- Permissions
+--
 INSERT INTO `permission` (`permission_key`, `module`, `label`, `nav_label`, `nav_href`, `show_in_menu`) VALUES
 ('add', 'OnePlace\\Contact\\Controller\\CategoryController', 'Add Category', '', '', 0),
 ('add', 'OnePlace\\Contact\\Controller\\SalutationController', 'Add Salutation', '', '', 0),
