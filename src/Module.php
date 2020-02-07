@@ -24,7 +24,6 @@ use Laminas\Session\Config\StandardConfig;
 use Laminas\Session\SessionManager;
 use Laminas\Session\Container;
 use Application\Controller\CoreEntityController;
-use OnePlace\Contact\Controller\PluginController;
 
 class Module {
     /**
@@ -71,21 +70,10 @@ class Module {
     public function getControllerConfig() : array {
         return [
             'factories' => [
-                # Plugin Example Controller
-                Controller\PluginController::class => function($container) {
-                    $oDbAdapter = $container->get(AdapterInterface::class);
-                    return new Controller\PluginController(
-                        $oDbAdapter,
-                        $container->get(Model\ContactTable::class),
-                        $container
-                    );
-                },
                 # Contact Main Controller
                 Controller\ContactController::class => function($container) {
                     $oDbAdapter = $container->get(AdapterInterface::class);
                     $tableGateway = $container->get(Model\ContactTable::class);
-                    # hook plugin
-                    CoreEntityController::addHook('contact-add-before',(object)['sFunction'=>'testFunction','oItem'=>new PluginController($oDbAdapter,$tableGateway,$container)]);
                     return new Controller\ContactController(
                         $oDbAdapter,
                         $container->get(Model\ContactTable::class),

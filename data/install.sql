@@ -64,10 +64,11 @@ INSERT INTO `core_form_field` (`Field_ID`, `type`, `label`, `fieldkey`, `tab`, `
 (NULL, 'text', 'Name', 'label', 'contact-base', 'contact-single', 'col-md-3', '/contact/view/##ID##', '', 0, 1, 0, '', '', '');
 
 --
--- Default Widgets
+-- User XP Activity
 --
-INSERT INTO `core_widget` (`Widget_ID`, `widget_name`, `label`, `permission`) VALUES
-(NULL, 'contact_dailystats', 'Contact - Daily Stats', 'index-Contact\\Controller\\ContactController'),
-(NULL, 'contact_taginfo', 'Contact - Tag Info', 'index-Contact\\Controller\\ContactController');
+INSERT INTO `user_xp_activity` (`Activity_ID`, `xp_key`, `label`, `xp_base`) VALUES
+(NULL, 'contact-add', 'Add New Contact', '50'),
+(NULL, 'contact-edit', 'Edit Contact', '5'),
+(NULL, 'contact-export', 'Edit Contact', '5');
 
 COMMIT;

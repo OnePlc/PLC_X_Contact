@@ -10,7 +10,7 @@
  * @copyright (C) 2020  Verein onePlace <admin@1plc.ch>
  * @license https://opensource.org/licenses/BSD-3-Clause
  * @version 1.0.0
- * @since 1.0.5
+ * @since 1.0.0
  */
 
 namespace OnePlace\Contact\Controller;
@@ -41,13 +41,13 @@ class ExportController extends CoreExportController
      * Dump Contacts to excel file
      *
      * @return ViewModel
-     * @since 1.0.5
+     * @since 1.0.0
      */
     public function dumpAction() {
         $this->layout('layout/json');
 
         # Use Default export function
-        $aViewData = $this->exportContactBasedData('Contacts','contact');
+        $aViewData = $this->exportData('Contacts','contact');
 
         # return data to view (popup)
         return new ViewModel($aViewData);

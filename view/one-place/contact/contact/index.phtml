@@ -1,2 +1,11 @@
-<?= $this->partial('partial/indexheader',['sTitle'=>'Contacts']) ?>
-<?= $this->partial('partial/indextable', ['sTableName'=>$sTableName,'aItems'=>$aItems,'sRoute'=>(isset($sRoute)) ? $sRoute : explode('-',$sTableName)[0]]); ?>
+<div class="card">
+    <div class="card-header">
+        <?= $this->partial('partial/indexheader',['sTitle'=>'Contacts']) ?>
+    </div>
+    <div class="card-body py-0">
+        <?= $this->partial('partial/indextable', ['sTableName'=>$sTableName,'aItems'=>$aItems]); ?>
+    </div>
+    <div class="card-footer">
+        <?= $this->partial('partial/indexpager', ['aItems'=>$aItems,'sRoute'=>(isset($sRoute)) ? $sRoute : explode('-',$sTableName)[0]]); ?>
+    </div>
+</div>

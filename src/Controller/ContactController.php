@@ -59,7 +59,6 @@ class ContactController extends CoreEntityController {
      * @return ViewModel - View Object with Data from Controller
      */
     public function indexAction() {
-
         # You can just use the default function and customize it via hooks
         # or replace the entire function if you need more customization
         return $this->generateIndexView('contact');

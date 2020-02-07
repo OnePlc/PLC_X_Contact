@@ -105,7 +105,7 @@ class ContactTable extends CoreEntityTable {
      * Generate new single Entity
      *
      * @return Contact
-     * @since 1.0.7
+     * @since 1.0.0
      */
     public function generateNew() {
         return new Contact($this->oTableGateway->getAdapter());
