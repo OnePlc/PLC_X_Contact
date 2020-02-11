@@ -31,7 +31,7 @@ class Module {
      *
      * @since 1.0.0
      */
-    const VERSION = '1.0.7';
+    const VERSION = '1.0.0';
 
     /**
      * Load module config file
@@ -102,6 +102,15 @@ class Module {
                 Controller\SearchController::class => function($container) {
                     $oDbAdapter = $container->get(AdapterInterface::class);
                     return new Controller\SearchController(
+                        $oDbAdapter,
+                        $container->get(Model\ContactTable::class),
+                        $container
+                    );
+                },
+                # Installer
+                Controller\InstallController::class => function($container) {
+                    $oDbAdapter = $container->get(AdapterInterface::class);
+                    return new Controller\InstallController(
                         $oDbAdapter,
                         $container->get(Model\ContactTable::class),
                         $container

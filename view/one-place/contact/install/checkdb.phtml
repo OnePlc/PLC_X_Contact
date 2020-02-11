@@ -1,0 +1,46 @@
+<div class="row">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header">
+                <h2>Check for installation</h2>
+            </div>
+            <div class="card-body">
+                <form action="" method="POST">
+                    <div class="form-group">
+                    <?php
+                    ?>
+                    <?php
+                    if($bTableExists) { ?>
+                        <div class="alert alert-success py-2 px-2">
+                            <?=$this->translate('Database is up-to-date')?>
+                        </div>
+                    <?php
+                    } else { ?>
+                        <div class="alert alert-warning py-2 px-2">
+                            <?=$this->translate('Database needs update. Please choose config')?>
+                        </div>
+                        <?php
+                        if(file_exists('vendor/'.$sVendor.'/'.$sModule.'/data/structure_simple.sql')) {
+                            ?> <br/><input type="radio" name="plc_module_setup_config" value="simple" checked /> Simple
+                            <?php
+                        }
+                        if(file_exists('vendor/'.$sVendor.'/'.$sModule.'/data/structure_extended.sql')) {
+                            ?> <br/><input type="radio" name="plc_module_setup_config" value="extended" /> Simple
+                            <?php
+                        }
+                    }
+                    ?>
+                    </div>
+
+                    <?php if (! $bTableExists) { ?>
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-primary">
+                            <?=$this->translate('Update Database')?>
+                        </button>
+                    </div>
+                    <?php } ?>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

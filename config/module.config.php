@@ -38,6 +38,20 @@ return [
                     ],
                 ],
             ],
+            'contact-setup' => [
+                'type'    => Segment::class,
+                'options' => [
+                    'route' => '/contact/setup[/:action[/:id]]',
+                    'constraints' => [
+                        'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
+                        'id'     => '[0-9]+',
+                    ],
+                    'defaults' => [
+                        'controller' => Controller\InstallController::class,
+                        'action'     => 'checkdb',
+                    ],
+                ],
+            ],
             'contact-api' => [
                 'type'    => Segment::class,
                 'options' => [
