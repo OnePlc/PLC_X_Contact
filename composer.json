@@ -2,7 +2,7 @@
     "name": "oneplace/oneplace-contact",
     "description": "onePlace Contact Module",
     "type": "oneplace-module",
-    "version": "1.0.7",
+    "version": "1.0.8",
     "license": "BSD-3-Clause",
     "keywords": [
         "laminas",
@@ -14,12 +14,12 @@
     ],
     "require-dev": {
         "phpunit/phpunit": "^8",
-        "oneplace/oneplace-core": "^1.0.13",
+        "oneplace/oneplace-core": "^1.0.19",
         "laminas/laminas-test": "^3.3.0"
     },
     "require": {
         "php": "^7.1",
-        "oneplace/oneplace-core": "^1.0.0",
+        "oneplace/oneplace-core": "^1.0.19",
         "phpoffice/phpspreadsheet": "^1.10"
     },
     "autoload": {

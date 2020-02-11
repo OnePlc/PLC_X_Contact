@@ -33,7 +33,7 @@ class ApiController extends CoreApiController {
      * @since 1.0.0
      */
     public function __construct(AdapterInterface $oDbAdapter,ContactTable $oTableGateway,$oServiceManager) {
-        parent::__construct($oDbAdapter,$oTableGateway,$oServiceManager);
+        parent::__construct($oDbAdapter,$oTableGateway,$oServiceManager,'firstname');
         $this->oTableGateway = $oTableGateway;
         $this->sSingleForm = 'contact-single';
         $this->sApiName = 'Contact';
