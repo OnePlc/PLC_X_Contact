@@ -2,7 +2,7 @@
     "name": "oneplace/oneplace-contact",
     "description": "onePlace Contact Module",
     "type": "oneplace-module",
-    "version": "1.0.8.1",
+    "version": "1.0.8.2",
     "license": "BSD-3-Clause",
     "keywords": [
         "laminas",
@@ -21,6 +21,7 @@
     "require": {
         "php": "^7.1",
         "oneplace/oneplace-core": "^1.0.19",
+        "oneplace/oneplace-tag": "^1.0.6",
         "phpoffice/phpspreadsheet": "^1.10"
     },
     "autoload": {
