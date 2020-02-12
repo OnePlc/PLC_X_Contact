@@ -16,7 +16,7 @@ INSERT INTO `core_form_field` (`Field_ID`, `type`, `label`, `fieldkey`, `tab`, `
 --
 -- Permissions
 --
-INSERT INTO `permission` (`permission_key`, `module`, `label`, `nav_label`, `nav_href`, `show_in_menu`) VALUES
+INSERT IGNORE INTO `permission` (`permission_key`, `module`, `label`, `nav_label`, `nav_href`, `show_in_menu`) VALUES
 ('add', 'OnePlace\\Contact\\Controller\\CategoryController', 'Add Category', '', '', 0),
 ('add', 'OnePlace\\Contact\\Controller\\SalutationController', 'Add Salutation', '', '', 0),
 ('add', 'OnePlace\\Contact\\Controller\\TitleController', 'Add Title', '', '', 0);
@@ -24,9 +24,7 @@ INSERT INTO `permission` (`permission_key`, `module`, `label`, `nav_label`, `nav
 --
 -- Custom Tags
 --
--- todo: add select before and check if tag exists
---
-INSERT INTO `core_tag` (`Tag_ID`, `tag_key`, `tag_label`, `created_by`, `created_date`, `modified_by`, `modified_date`) VALUES
+INSERT IGNORE INTO `core_tag` (`Tag_ID`, `tag_key`, `tag_label`, `created_by`, `created_date`, `modified_by`, `modified_date`) VALUES
 (NULL, 'salutation', 'Salutation', '1', '0000-00-00 00:00:00', '1', '0000-00-00 00:00:00'),
 (NULL, 'title', 'Title', '1', '0000-00-00 00:00:00', '1', '0000-00-00 00:00:00');
 
