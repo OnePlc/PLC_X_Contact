@@ -57,7 +57,7 @@ class Module {
                 Model\ContactTableGateway::class => function ($container) {
                     $dbAdapter = $container->get(AdapterInterface::class);
                     $resultSetPrototype = new ResultSet();
-                    $resultSetPrototype->setArrayObjectPrototype(new Model\Contact($dbAdapter));
+                    $resultSetPrototype->setArrayObjectPrototype(new Model\ChildContact($dbAdapter));
                     return new TableGateway('contact', $dbAdapter, null, $resultSetPrototype);
                 },
             ],

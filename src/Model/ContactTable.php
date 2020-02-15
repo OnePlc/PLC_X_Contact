@@ -59,7 +59,7 @@ class ContactTable extends CoreEntityTable {
      * @return int Contact ID
      * @since 1.0.0
      */
-    public function saveSingle(Contact $oContact) {
+    public function saveSingle(ChildContact $oContact) {
         $aDefaultData = [
             'label' => $oContact->label,
         ];
@@ -74,6 +74,6 @@ class ContactTable extends CoreEntityTable {
      * @since 1.0.0
      */
     public function generateNew() {
-        return new Contact($this->oTableGateway->getAdapter());
+        return new ChildContact($this->oTableGateway->getAdapter());
     }
 }

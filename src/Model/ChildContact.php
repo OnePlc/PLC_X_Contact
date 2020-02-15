@@ -15,11 +15,8 @@
 
 namespace OnePlace\Contact\Model;
 
-use Application\Model\CoreEntityModel;
-
-class Contact extends CoreEntityModel {
-    public $label;
-
+class ChildContact extends Contact
+{
     /**
      * Contact constructor.
      *
@@ -28,12 +25,6 @@ class Contact extends CoreEntityModel {
      */
     public function __construct($oDbAdapter) {
         parent::__construct($oDbAdapter);
-
-        # Set Single Form Name
-        $this->sSingleForm = 'contact-single';
-
-        # Attach Dynamic Fields to Entity Model
-        $this->attachDynamicFields();
     }
 
     /**
@@ -43,6 +34,9 @@ class Contact extends CoreEntityModel {
      * @since 1.0.0
      */
     public function exchangeArray(array $aData) {
+        if(empty($aData['label']))
+            $aData['label']=$aData['firstname'].' '.$aData['lastname'];
+
         $this->id = !empty($aData['Contact_ID']) ? $aData['Contact_ID'] : 0;
         $this->label = !empty($aData['label']) ? $aData['label'] : '';
         $this->updateDynamicFields($aData);
