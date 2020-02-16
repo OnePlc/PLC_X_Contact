@@ -20,12 +20,9 @@
                             <?=$this->translate('Database needs update. Please choose config')?>
                         </div>
                         <?php
-                        if(file_exists('vendor/'.$sVendor.'/'.$sModule.'/data/structure_simple.sql')) {
-                            ?> <br/><input type="radio" name="plc_module_setup_config" value="simple" checked /> Simple
-                            <?php
-                        }
-                        if(file_exists('vendor/'.$sVendor.'/'.$sModule.'/data/structure_extended.sql')) {
-                            ?> <br/><input type="radio" name="plc_module_setup_config" value="extended" /> Simple
+                        foreach(glob('vendor/'.$sVendor.'/'.$sModule.'/data/structure_*.sql') as $sConfig) {
+                            $sConfig = str_replace(['.sql'],[],explode('_',basename($sConfig))[1]); ?>
+                            <br/><input type="radio" name="plc_module_setup_config" value="<?=$sConfig?>" checked /> <?=$sConfig?>
                             <?php
                         }
                     }

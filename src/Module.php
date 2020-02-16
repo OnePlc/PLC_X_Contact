@@ -31,7 +31,7 @@ class Module {
      *
      * @since 1.0.0
      */
-    const VERSION = '1.0.8.2';
+    const VERSION = '1.0.9';
 
     /**
      * Load module config file

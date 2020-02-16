@@ -1,47 +1,70 @@
-<div class="row">
-    <div class="col-md-12">
-        <div class="card">
-            <div class="card-header">
-                <h2>Find Contact</h2>
-            </div>
-            <?php if(isset($aResults)) { ?>
-
-            <?php } else { ?>
-            <form action="" method="post">
-                <div class="card-body">
-                    <?= $this->partial('partial/basictabs', ['sFormName'=>$this->sFormName]); ?>
-                    <?= $this->partial('partial/searchtabcontents', ['sFormName'=>$this->sFormName]); ?>
-                </div>
-                <div class="card-footer">
-                    <button class="btn btn-primary" type="submit">
-                        Start Search
-                    </button>
-                </div>
-            </form>
-            <?php } ?>
+<?php
+if(isset($sTableName)) {
+    $sRoute = (isset($sRoute)) ? $sRoute : explode('-',$sTableName)[0];
+    ?>
+    <div class="card">
+        <div class="card-header">
+            <?= $this->partial('partial/indexheader',['sTitle'=>'Contacts']) ?>
+        </div>
+        <div class="card-body py-0">
+            <?= $this->partial('partial/indextable', [
+                'sTableName' => $sTableName,
+                'aItems' => $aItems,
+                'aFilters' => $aFilters,
+                'sRoute' => $sRoute
+            ]); ?>
+        </div>
+        <div class="card-footer">
+            <?= $this->partial('partial/indexpager', ['aItems' => $aItems,'sRoute' => $sRoute]); ?>
         </div>
     </div>
-    <?php if(isset($aResults)) { ?>
+<?php } else { ?>
+    <div class="row">
         <div class="col-md-12">
             <div class="card">
                 <div class="card-header">
-                    <h2>Results</h2>
+                    <h2>Find Contact</h2>
                 </div>
-                <div class="card-body">
-                    <ul class="list-group">
-                    <?php
-                    foreach($aResults as $oContact) { ?>
-                        <li class="list-group-item">
-                            <a href="<?=$this->url('contact',['action'=>'view','id'=>$oContact->getID()])?>" title="<?=$this->translate('View Contact')?>">
-                                <?=$oContact->getLabel();?>
-                            </a>
-                        </li>
-                    <?php
-                    }
-                    ?>
-                    </ul>
-                </div>
+                <?php if(isset($aResults)) { ?>
+
+                <?php } else { ?>
+                    <form action="" method="post">
+                        <div class="card-body">
+                            <?= $this->partial('partial/basictabs', ['sFormName'=>$this->sFormName]); ?>
+                            <?= $this->partial('partial/searchtabcontents', ['sFormName'=>$this->sFormName]); ?>
+                        </div>
+                        <div class="card-footer">
+                            <button class="btn btn-primary" type="submit">
+                                Start Search
+                            </button>
+                        </div>
+                    </form>
+                <?php } ?>
             </div>
         </div>
-    <?php } ?>
-</div>
+        <?php if(isset($aResults)) { ?>
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h2>Results - <?=$aResults->getTotalItemCount()?></h2>
+                    </div>
+                    <div class="card-body">
+                        <ul class="list-group">
+                            <?php
+                            foreach($aResults as $oContact) { ?>
+                                <li class="list-group-item">
+                                    <a href="<?=$this->url('contact',['action'=>'view','id'=>$oContact->getID()])?>" title="<?=$this->translate('View Contact')?>">
+                                        <?=$oContact->getLabel();?>
+                                    </a>
+                                </li>
+                                <?php
+                            }
+                            ?>
+                        </ul>
+                        <?= $this->partial('partial/indexpager', ['aItems'=>$aResults,'sRoute'=>'contact-search']); ?>
+                    </div>
+                </div>
+            </div>
+        <?php } ?>
+    </div>
+<?php } ?>
