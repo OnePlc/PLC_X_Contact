@@ -1,11 +1,35 @@
 <div class="card">
     <div class="card-header">
-        <?= $this->partial('partial/indexheader',['sTitle'=>'Contacts']) ?>
+        <div class="row">
+            <div class="col-md-10">
+                <?= $this->partial('partial/indexheader',['sTitle'=>'Contacts']) ?>
+            </div>
+            <div class="col-md-2 text-right">
+                <select class="form-control">
+                    <option>-- <?=$this->translate('All')?> --</option>
+                    <?php
+                    if (count($aSavedSearches) > 0) {
+                        foreach($aSavedSearches as $oSearch) { ?>
+                            <option value="<?=$oSearch->Search_ID?>">
+                                <?=$oSearch->label?>
+                            </option>
+                            <?php
+                        }
+                    }
+                    ?>
+                </select>
+            </div>
+        </div>
     </div>
     <div class="card-body py-0">
-        <?= $this->partial('partial/indextable', ['sTableName'=>$sTableName,'aItems'=>$aItems]); ?>
+        <?= $this->partial('partial/indextable', [
+            'sTableName' => $sTableName,
+            'aItems' => $aItems,
+            'aFilters' => $aFilters,
+            'sRoute' => $sRoute
+        ]); ?>
     </div>
     <div class="card-footer">
-        <?= $this->partial('partial/indexpager', ['aItems'=>$aItems,'sRoute'=>(isset($sRoute)) ? $sRoute : explode('-',$sTableName)[0]]); ?>
+        <?= $this->partial('partial/indexpager', ['aItems'=>$aItems,'sRoute'=>$sRoute]); ?>
     </div>
 </div>
