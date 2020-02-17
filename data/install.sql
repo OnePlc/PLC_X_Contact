@@ -44,7 +44,8 @@ INSERT INTO `core_index_table` (`table_name`, `form`, `label`) VALUES
 --
 -- Tabs
 --
-INSERT INTO `core_form_tab` (`Tab_ID`, `form`, `title`, `subtitle`, `icon`, `counter`, `sort_id`, `filter_check`, `filter_value`) VALUES ('contact-base', 'contact-single', 'Contact', 'Base', 'fas fa-cogs', '', '0', '', '');
+INSERT INTO `core_form_tab` (`Tab_ID`, `form`, `title`, `subtitle`, `icon`, `counter`, `sort_id`, `filter_check`, `filter_value`)
+VALUES ('contact-base', 'contact-single', 'Contact', 'Base', 'fas fa-cogs', '', '0', '', '');
 
 --
 -- Buttons

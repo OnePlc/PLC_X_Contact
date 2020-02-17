@@ -2,7 +2,7 @@
     "name": "oneplace/oneplace-contact",
     "description": "onePlace Contact Module",
     "type": "oneplace-module",
-    "version": "1.0.9",
+    "version": "1.0.9.1",
     "license": "BSD-3-Clause",
     "keywords": [
         "laminas",

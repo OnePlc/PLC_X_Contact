@@ -34,9 +34,13 @@ class ChildContact extends Contact
      * @since 1.0.0
      */
     public function exchangeArray(array $aData) {
-        if(empty($aData['label']))
-            $aData['label']=$aData['firstname'].' '.$aData['lastname'];
-
+        //var_dump($aData);
+        if(empty($aData['label'])){
+            if(!empty($aData['firstname']))
+                $aData['label']=$aData['firstname'];
+            if(!empty($aData['lastname']))
+                $aData['label']=$aData['label'].' '.$aData['lastname'];
+        }
         $this->id = !empty($aData['Contact_ID']) ? $aData['Contact_ID'] : 0;
         $this->label = !empty($aData['label']) ? $aData['label'] : '';
         $this->updateDynamicFields($aData);
