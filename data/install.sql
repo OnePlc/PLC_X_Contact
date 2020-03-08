@@ -73,4 +73,9 @@ INSERT INTO `user_xp_activity` (`Activity_ID`, `xp_key`, `label`, `xp_base`) VAL
 (NULL, 'contact-edit', 'Edit Contact', '5'),
 (NULL, 'contact-export', 'Edit Contact', '5');
 
+--
+-- icon
+--
+INSERT INTO `settings` (`settings_key`, `settings_value`) VALUES ('contact-icon', 'fas fa-users');
+
 COMMIT;
