@@ -3,7 +3,6 @@
 --
 CREATE TABLE `contact` (
   `Contact_ID` int(11) NOT NULL,
-  `label` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `created_by` int(11) NOT NULL,
   `created_date` datetime NOT NULL,
   `modified_by` int(11) NOT NULL,

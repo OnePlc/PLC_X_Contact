@@ -18,8 +18,6 @@ namespace OnePlace\Contact\Model;
 use Application\Model\CoreEntityModel;
 
 class Contact extends CoreEntityModel {
-    public $label;
-
     /**
      * Contact constructor.
      *
@@ -44,7 +42,6 @@ class Contact extends CoreEntityModel {
      */
     public function exchangeArray(array $aData) {
         $this->id = !empty($aData['Contact_ID']) ? $aData['Contact_ID'] : 0;
-        $this->label = !empty($aData['label']) ? $aData['label'] : '';
         $this->updateDynamicFields($aData);
     }
 }

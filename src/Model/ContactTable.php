@@ -61,7 +61,7 @@ class ContactTable extends CoreEntityTable {
      */
     public function saveSingle(ChildContact $oContact) {
         $aDefaultData = [
-            'label' => $oContact->label,
+            'firstname' => $oContact->firstname,
         ];
 
         return $this->saveSingleEntity($oContact,'Contact_ID',$aDefaultData);
