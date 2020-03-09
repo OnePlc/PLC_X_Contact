@@ -1,8 +1,17 @@
+<?php
+use Application\Controller\CoreController;
+$sIcon = (array_key_exists('contact-icon',CoreController::$aGlobalSettings))
+    ?  CoreController::$aGlobalSettings['contact-icon'] : '';
+?>
 <div class="card">
     <div class="card-header">
         <div class="row">
             <div class="col-md-10">
-                <?= $this->partial('partial/indexheader',['sTitle'=>'Contacts']) ?>
+                <?= $this->partial('partial/indexheader',[
+                    'sTitle'=>'Contacts',
+                    'sIcon' => $sIcon,
+                    'sCount'=>$aItems->getTotalItemCount().' total'
+                ]) ?>
             </div>
             <div class="col-md-2 text-right">
                 <select class="form-control">

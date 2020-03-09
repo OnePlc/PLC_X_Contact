@@ -1,0 +1,48 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: de_DE\n"
+"X-Generator: Poedit 2.2.4\n"
+
+msgid "Contact"
+msgstr "Kontakt"
+
+msgid "Contacts"
+msgstr "Kontakte"
+
+msgid "Add Contact"
+msgstr "Kontakt erfassen"
+
+msgid "Export Contacts"
+msgstr "Kontakte exportieren"
+
+msgid "Find Contacts"
+msgstr "Kontakt finden"
+
+msgid "Edit Contact"
+msgstr "Kontakt bearbeiten"
+
+msgid "Save Contact"
+msgstr "Kontakt speichern"
+
+msgid "Firstname"
+msgstr "Vorname"
+
+msgid "Lastname"
+msgstr "Nachname"
+
+msgid "Phone"
+msgstr "Tel"
+
+msgid "Salutation"
+msgstr "Anrede"
+
+msgid "Title"
+msgstr "Titel"
