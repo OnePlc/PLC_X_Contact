@@ -1,4 +1,4 @@
-ALTER TABLE `contact` ADD `description` TEXT NOT NULL DEFAULT '' AFTER `label`,
+ALTER TABLE `contact` ADD `description` TEXT NOT NULL DEFAULT '' AFTER `Contact_ID`,
 ADD `firstname` VARCHAR(255) NOT NULL DEFAULT '' AFTER `description`,
 ADD `lastname` VARCHAR(255) NOT NULL DEFAULT '' AFTER `firstname`,
 ADD `email_private` VARCHAR(255) NOT NULL DEFAULT '' AFTER `lastname`,
