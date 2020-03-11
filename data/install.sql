@@ -77,4 +77,9 @@ INSERT INTO `user_xp_activity` (`Activity_ID`, `xp_key`, `label`, `xp_base`) VAL
 --
 INSERT INTO `settings` (`settings_key`, `settings_value`) VALUES ('contact-icon', 'fas fa-users');
 
+--
+-- quickseach fix
+--
+INSERT INTO `settings` (`settings_key`, `settings_value`) VALUES ('quicksearch-contact-customlabel', 'lastname');
+
 COMMIT;

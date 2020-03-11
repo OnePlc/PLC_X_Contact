@@ -28,6 +28,15 @@ INSERT IGNORE INTO `core_tag` (`Tag_ID`, `tag_key`, `tag_label`, `created_by`, `
 (NULL, 'salutation', 'Salutation', '1', '0000-00-00 00:00:00', '1', '0000-00-00 00:00:00'),
 (NULL, 'title', 'Title', '1', '0000-00-00 00:00:00', '1', '0000-00-00 00:00:00');
 
+COMMIT;
+
+--
+-- Custom Entity Tags
+--
+INSERT INTO `core_entity_tag` (`Entitytag_ID`, `entity_form_idfs`, `tag_idfs`, `tag_value`, `tag_color`, `tag_icon`, `parent_tag_idfs`, `created_by`, `created_date`, `modified_by`, `modified_date`) VALUES
+(NULL, 'contact-single', (select `Tag_ID` from `core_tag` where `tag_key`='salutation'), 'Sir', '', '', '0', '1', CURRENT_TIME(), '1', CURRENT_TIME()),
+(NULL, 'contact-single', (select `Tag_ID` from `core_tag` where `tag_key`='salutation'), 'Mrs', '', '', '0', '1', CURRENT_TIME(), '1', CURRENT_TIME());
+
 --
 -- Remove Label
 --
