@@ -41,3 +41,5 @@ INSERT INTO `core_entity_tag` (`Entitytag_ID`, `entity_form_idfs`, `tag_idfs`, `
 -- Remove Label
 --
 DELETE FROM `core_form_field` WHERE `form` = 'contact-single' AND `type` = 'TEXT' AND `fieldkey` = 'label';
+
+COMMIT;
