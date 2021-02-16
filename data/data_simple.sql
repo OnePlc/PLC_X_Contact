@@ -1,16 +1,16 @@
 --
 -- Core Form - Contact Base Fields
 --
-INSERT INTO `core_form_field` (`Field_ID`, `type`, `label`, `fieldkey`, `tab`, `form`, `class`, `url_view`, `url_list`, `show_widget_left`, `allow_clear`, `readonly`, `tbl_cached_name`, `tbl_class`, `tbl_permission`) VALUES
-(NULL, 'textarea', 'Description', 'description', 'contact-base', 'contact-single', 'col-md-12', '', '', 0, 1, 0, '', '', ''),
-(NULL, 'text', 'Firstname', 'firstname', 'contact-base', 'contact-single', 'col-md-3', '/contact/view/##ID##', '', 0, 1, 0, '', '', ''),
-(NULL, 'text', 'Lastname', 'lastname', 'contact-base', 'contact-single', 'col-md-3', '/contact/view/##ID##', '', 0, 1, 0, '', '', ''),
-(NULL, 'email', 'E-Mail', 'email_private', 'contact-base', 'contact-single', 'col-md-3', '/contact/view/##ID##', '', 0, 1, 0, '', '', ''),
-(NULL, 'text', 'Phone', 'phone_private', 'contact-base', 'contact-single', 'col-md-3', '/contact/view/##ID##', '', 0, 1, 0, '', '', ''),
-(NULL, 'featuredimage', 'Featured Image', 'featured_image', 'contact-base', 'contact-single', 'col-md-3', '', '', 0, 1, 0, '', '', ''),
-(NULL, 'multiselect', 'Categories', 'category_idfs', 'contact-base', 'contact-single', 'col-md-3', '', '/tag/api/list/contact-single/category', 0, 1, 0, 'entitytag-single', 'OnePlace\\Tag\\Model\\EntityTagTable', 'add-OnePlace\\Contact\\Controller\\CategoryController'),
-(NULL, 'select', 'Salutation', 'salutation_idfs', 'contact-base', 'contact-single', 'col-md-3', '', '/tag/api/list/contact-single/salutation', 0, 1, 0, 'entitytag-single', 'OnePlace\\Tag\\Model\\EntityTagTable', 'add-OnePlace\\Contact\\Controller\\SalutationController'),
-(NULL, 'select', 'Title', 'title_idfs', 'contact-base', 'contact-single', 'col-md-3', '', '/tag/api/list/contact-single/title', 0, 1, 0, 'entitytag-single', 'OnePlace\\Tag\\Model\\EntityTagTable', 'add-OnePlace\\Contact\\Controller\\TitleController');
+INSERT INTO `core_form_field` (`Field_ID`, `type`, `label`, `fieldkey`, `tab`, `form`, `class`, `url_view`, `url_list`, `tag_key`, `show_widget_left`, `allow_clear`, `readonly`, `tbl_cached_name`, `tbl_class`, `tbl_permission`) VALUES
+(NULL, 'textarea', 'Description', 'description', 'contact-base', 'contact-single', 'col-md-12', '', '', '', 0, 1, 0, '', '', ''),
+(NULL, 'text', 'Firstname', 'firstname', 'contact-base', 'contact-single', 'col-md-3', '/contact/view/##ID##', '', '', 0, 1, 0, '', '', ''),
+(NULL, 'text', 'Lastname', 'lastname', 'contact-base', 'contact-single', 'col-md-3', '/contact/view/##ID##', '', '', 0, 1, 0, '', '', ''),
+(NULL, 'email', 'E-Mail', 'email_private', 'contact-base', 'contact-single', 'col-md-3', '/contact/view/##ID##', '', '', 0, 1, 0, '', '', ''),
+(NULL, 'text', 'Phone', 'phone_private', 'contact-base', 'contact-single', 'col-md-3', '/contact/view/##ID##', '', '', 0, 1, 0, '', '', ''),
+(NULL, 'featuredimage', 'Featured Image', 'featured_image', 'contact-base', 'contact-single', 'col-md-3', '', '', '', 0, 1, 0, '', '', ''),
+(NULL, 'multiselect', 'Categories', 'category', 'contact-base', 'contact-single', 'col-md-3', '', '/tag/api/list/contact-single/category', 'category', 0, 1, 0, 'entitytag-single', 'OnePlace\\Tag\\Model\\EntityTagTable', 'add-OnePlace\\Contact\\Controller\\CategoryController'),
+(NULL, 'select', 'Salutation', 'salutation_idfs', 'contact-base', 'contact-single', 'col-md-3', '', '/tag/api/list/contact-single/salutation', '', 0, 1, 0, 'entitytag-single', 'OnePlace\\Tag\\Model\\EntityTagTable', 'add-OnePlace\\Contact\\Controller\\SalutationController'),
+(NULL, 'select', 'Title', 'title_idfs', 'contact-base', 'contact-single', 'col-md-3', '', '/tag/api/list/contact-single/title', '', 0, 1, 0, 'entitytag-single', 'OnePlace\\Tag\\Model\\EntityTagTable', 'add-OnePlace\\Contact\\Controller\\TitleController');
 
 
 --
