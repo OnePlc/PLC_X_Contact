@@ -1,4 +1,5 @@
 ALTER TABLE `contact` ADD `description` TEXT NOT NULL DEFAULT '' AFTER `Contact_ID`,
+ADD `is_company` BOOLEAN NOT NULL DEFAULT FALSE,
 ADD `firstname` VARCHAR(255) NOT NULL DEFAULT '' AFTER `description`,
 ADD `lastname` VARCHAR(255) NOT NULL DEFAULT '' AFTER `firstname`,
 ADD `email_private` VARCHAR(255) NOT NULL DEFAULT '' AFTER `lastname`,

@@ -18,6 +18,8 @@ namespace OnePlace\Contact\Model;
 use Application\Model\CoreEntityModel;
 
 class Contact extends CoreEntityModel {
+    protected $is_company;
+
     /**
      * Contact constructor.
      *
@@ -42,6 +44,12 @@ class Contact extends CoreEntityModel {
      */
     public function exchangeArray(array $aData) {
         $this->id = !empty($aData['Contact_ID']) ? $aData['Contact_ID'] : 0;
+        $this->is_company = !empty($aData['is_company']) ? $aData['is_company'] : 0;
         $this->updateDynamicFields($aData);
+    }
+
+    public function isCompany()
+    {
+        return $this->is_company;
     }
 }

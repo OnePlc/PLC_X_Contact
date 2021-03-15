@@ -31,8 +31,9 @@ INSERT INTO `permission` (`permission_key`, `module`, `label`, `nav_label`, `nav
 --
 -- Form
 --
-INSERT INTO `core_form` (`form_key`, `label`, `entity_class`, `entity_tbl_class`) VALUES
-('contact-single', 'Contact', 'OnePlace\\Contact\\Model\\Contact', 'OnePlace\\Contact\\Model\\ContactTable');
+  INSERT INTO `core_form` (`form_key`, `label`, `entity_class`, `entity_tbl_class`) VALUES
+('contact-single', 'Contact', 'OnePlace\\Contact\\Model\\Contact', 'OnePlace\\Contact\\Model\\ContactTable'),
+('company-single', 'Company', 'OnePlace\\Contact\\Model\\Contact', 'OnePlace\\Contact\\Model\\ContactTable');
 
 --
 -- Index List
@@ -43,8 +44,9 @@ INSERT INTO `core_index_table` (`table_name`, `form`, `label`) VALUES
 --
 -- Tabs
 --
-INSERT INTO `core_form_tab` (`Tab_ID`, `form`, `title`, `subtitle`, `icon`, `counter`, `sort_id`, `filter_check`, `filter_value`)
-VALUES ('contact-base', 'contact-single', 'Contact', 'Base', 'fas fa-cogs', '', '0', '', '');
+INSERT INTO `core_form_tab` (`Tab_ID`, `form`, `title`, `subtitle`, `icon`, `counter`, `sort_id`, `filter_check`, `filter_value`) VALUES
+('contact-base', 'contact-single', 'Contact', 'Base', 'fas fa-cogs', '', '0', '', ''),
+('company-base', 'company-single', 'Company', 'Base', 'fas fa-cogs', '', '0', '', '');
 
 --
 -- Buttons
@@ -56,7 +58,9 @@ INSERT INTO `core_form_button` (`Button_ID`, `label`, `icon`, `title`, `href`, `
 (NULL, 'Export Contacts', 'fas fa-file-excel', 'Export Contacts', '/contact/export', 'primary', '', 'contact-index', 'link', '', ''),
 (NULL, 'Find Contacts', 'fas fa-search', 'Find Contacts', '/contact/search', 'primary', '', 'contact-index', 'link', '', ''),
 (NULL, 'Export Contacts', 'fas fa-file-excel', 'Export Contacts', '#', 'primary initExcelDump', '', 'contact-search', 'link', '', ''),
-(NULL, 'New Search', 'fas fa-search', 'New Search', '/contact/search', 'primary', '', 'contact-search', 'link', '', '');
+(NULL, 'New Search', 'fas fa-search', 'New Search', '/contact/search', 'primary', '', 'contact-search', 'link', '', ''),
+(NULL, 'Add Company', 'fas fa-plus', 'Add Company', '/contact/add/company', 'primary', '', 'contact-index', 'link', '', ''),
+(NULL, 'Save Company', 'fas fa-save', 'Save Company', '#', 'primary saveForm', '', 'company-single', 'link', '', '');
 
 --
 -- User XP Activity
