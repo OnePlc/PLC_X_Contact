@@ -60,7 +60,8 @@ INSERT INTO `core_form_button` (`Button_ID`, `label`, `icon`, `title`, `href`, `
 (NULL, 'Export Contacts', 'fas fa-file-excel', 'Export Contacts', '#', 'primary initExcelDump', '', 'contact-search', 'link', '', ''),
 (NULL, 'New Search', 'fas fa-search', 'New Search', '/contact/search', 'primary', '', 'contact-search', 'link', '', ''),
 (NULL, 'Add Company', 'fas fa-plus', 'Add Company', '/contact/add/company', 'primary', '', 'contact-index', 'link', '', ''),
-(NULL, 'Save Company', 'fas fa-save', 'Save Company', '#', 'primary saveForm', '', 'company-single', 'link', '', '');
+(NULL, 'Save Company', 'fas fa-save', 'Save Company', '#', 'primary saveForm', '', 'company-single', 'link', '', ''),
+(NULL, 'Edit Company', 'fas fa-edit', 'Edit Company', '/contact/edit/##ID##', 'primary', '', 'company-view', 'link', '', '');
 
 --
 -- User XP Activity

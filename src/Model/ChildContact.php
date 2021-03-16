@@ -17,6 +17,8 @@ namespace OnePlace\Contact\Model;
 
 class ChildContact extends Contact
 {
+    protected $is_company;
+
     /**
      * Contact constructor.
      *
@@ -35,10 +37,17 @@ class ChildContact extends Contact
      */
     public function exchangeArray(array $aData) {
         $this->id = !empty($aData['Contact_ID']) ? $aData['Contact_ID'] : 0;
+        $this->is_company = !empty($aData['is_company']) ? $aData['is_company'] : 0;
         $this->updateDynamicFields($aData);
     }
 
-    public function getLabel() {
+    public function getFirstname()
+    {
+        return $this->firstname;
+    }
+
+    public function getLabel()
+    {
         $sLabel = $this->firstname;
         if($this->lastname != '') {
             $sLabel .= ' '.$this->lastname;

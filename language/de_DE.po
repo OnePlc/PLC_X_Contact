@@ -14,11 +14,20 @@ msgstr ""
 msgid "Contact"
 msgstr "Kontakt"
 
+msgid "Company"
+msgstr "Firma"
+
 msgid "Contacts"
 msgstr "Kontakte"
 
 msgid "Add Contact"
 msgstr "Kontakt erfassen"
+
+msgid "Add Company"
+msgstr "Firma erfassen"
+
+msgid "Edit Company"
+msgstr "Firma bearbeiten"
 
 msgid "Export Contacts"
 msgstr "Kontakte exportieren"

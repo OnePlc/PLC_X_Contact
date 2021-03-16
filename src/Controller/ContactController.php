@@ -84,7 +84,7 @@ class ContactController extends CoreEntityController {
 
         $sMode = $this->params()->fromRoute('id', '');
         if($sMode == 'company') {
-            return $this->generateAddView('contact','company-single');
+            return $this->generateAddView('contact','company-single','','view',0,[],'Company successfully created',['is_company' => 1]);
         } else {
             return $this->generateAddView('contact');
         }
@@ -107,7 +107,16 @@ class ContactController extends CoreEntityController {
          * contact-edit-before-save (before save)
          * contact-edit-after-save (after save)
          */
-        return $this->generateEditView('contact');
+
+        $iContactID = $this->params()->fromRoute('id', '');
+
+        $oContact = $this->oTableGateway->getSingle($iContactID);
+
+        if($oContact->isCompany()) {
+            return $this->generateEditView('contact','company-single', '', 'view', 0, [],'','contact-single');
+        } else {
+            return $this->generateEditView('contact');
+        }
     }
 
     /**
@@ -131,8 +140,7 @@ class ContactController extends CoreEntityController {
         $oContact = $this->oTableGateway->getSingle($iContactID);
 
         if($oContact->isCompany()) {
-            echo 'company';
-            return $this->generateViewView('contact','company-single');
+            return $this->generateViewView('contact','company-single', 'contact-single');
         } else {
             return $this->generateViewView('contact');
         }
