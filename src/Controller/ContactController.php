@@ -61,7 +61,11 @@ class ContactController extends CoreEntityController {
     public function indexAction() {
         # You can just use the default function and customize it via hooks
         # or replace the entire function if you need more customization
-        return $this->generateIndexView('contact');
+        if(CoreEntityController::$oSession->oUser->hasPermission('admin', 'OnePlace-Contact-Controller-ContactController')) {
+            return $this->generateIndexView('contact');
+        } else {
+            return $this->generateIndexView('contact', [], ['created_by' => CoreEntityController::$oSession->oUser->getID()]);
+        }
     }
 
     /**
